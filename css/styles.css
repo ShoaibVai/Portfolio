@@ -239,7 +239,7 @@ img {
 
 /* Game Sections */
 .game-section {
-    display: none;
+    display: block;
     min-height: 100vh;
     padding: 80px 20px 20px;
     position: relative;
@@ -310,7 +310,6 @@ img {
     text-shadow: 
         3px 3px 0 var(--shadow-color),
         -3px -3px 0 var(--accent-color);
-    animation: titleGlow 2s infinite alternate;
 }
 
 .game-subtitle {
@@ -323,12 +322,13 @@ img {
 .pixel-character {
     width: 150px;
     height: 150px;
-    background-image: url('../assets/images/pixel-character.png');
-    background-size: contain;
+    background-image: url('../assets/images/avatar.png');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
     margin: 20px 0;
-    animation: float 3s infinite alternate ease-in-out;
 }
 
 #start-button {
@@ -336,12 +336,11 @@ img {
     margin-bottom: 20px;
 }
 
-.blink-text {
+.instruction-text {
     font-family: var(--game-font);
     font-size: 1.2rem;
     color: var(--text-color);
     opacity: 0.7;
-    animation: blink 1.5s infinite;
 }
 
 /* Main Menu */
@@ -374,7 +373,6 @@ img {
     box-shadow: 
         0 4px 0 rgba(0, 0, 0, 0.2),
         inset 0 4px 0 rgba(255, 255, 255, 0.2);
-    transition: transform 0.1s, box-shadow 0.1s;
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
@@ -526,7 +524,7 @@ img {
 .character-avatar {
     width: 200px;
     height: 200px;
-    background-image: url('../assets/images/avatar.jpg');
+    background-image: url('../assets/images/avatar.png');
     background-size: cover;
     background-position: center;
     border: 3px solid var(--primary-color);
@@ -983,7 +981,7 @@ img {
 .dialogue-avatar {
     width: 50px;
     height: 50px;
-    background-image: url('../assets/images/avatar-small.jpg');
+    background-image: url('../assets/images/avatar-small.png');
     background-size: cover;
     background-position: center;
     border-radius: 50%;

@@ -9,6 +9,7 @@ const menuButtons = document.querySelectorAll('.menu-button');
 const backButtons = document.querySelectorAll('.back-button');
 const toggleThemeButton = document.getElementById('toggle-theme');
 const toggleSoundButton = document.getElementById('toggle-sound');
+const backgroundMusic = document.getElementById('background-music');
 const contactForm = document.getElementById('contact-form');
 const sections = document.querySelectorAll('.game-section');
 
@@ -18,6 +19,7 @@ let currentTheme = localStorage.getItem('theme') || 'light';
 let loadingProgress = 0;
 let assets = [];
 let currentSection = null;
+let musicStarted = false;
 
 // Initialize the portfolio
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,15 +27,42 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.setAttribute('data-theme', currentTheme);
     updateThemeIcon();
     
+    // Initialize sound preference
+    const savedSoundPreference = localStorage.getItem('soundEnabled');
+    if (savedSoundPreference !== null) {
+        soundEnabled = savedSoundPreference === 'true';
+        updateSoundIcon();
+    }
+    
+    // Start background music automatically if sound is enabled
+    if (soundEnabled && backgroundMusic) {
+        // Add a small delay to ensure the audio element is ready
+        setTimeout(() => {
+            backgroundMusic.play().then(() => {
+                musicStarted = true;
+                console.log('Background music started automatically');
+            }).catch(e => {
+                console.log('Auto-play prevented by browser, will start on first user interaction:', e);
+                // Add event listener for first user interaction
+                document.addEventListener('click', startMusicOnFirstInteraction, { once: true });
+                document.addEventListener('keydown', startMusicOnFirstInteraction, { once: true });
+            });
+        }, 500);
+    }
+    
     // Preload assets
     preloadAssets();
+    
+    // Create anchored decorations after page loads
+    setTimeout(createAnchoredDecorations, 1000);
     
     // Start button event listener
     startButton.addEventListener('click', startGame);
     
-    // Enter key to start
+    // Enter key to start (PC users)
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' && titleScreen.classList.contains('active')) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent any default behavior
             startGame();
         }
     });
@@ -42,16 +71,27 @@ document.addEventListener('DOMContentLoaded', () => {
     menuButtons.forEach(button => {
         button.addEventListener('click', () => {
             const sectionId = button.getAttribute('data-section');
-            showSection(sectionId);
             playSound('click-sound');
+            
+            // Smooth scroll to the target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
     });
     
     // Back buttons
     backButtons.forEach(button => {
         button.addEventListener('click', () => {
-            showSection('main-menu');
             playSound('click-sound');
+            
+            // Smooth scroll back to main menu
+            document.getElementById('main-menu').scrollIntoView({
+                behavior: 'smooth'
+            });
         });
     });
     
@@ -163,66 +203,14 @@ function completeLoading() {
     }, 500);
 }
 
-// Start the game (transition from title screen to main menu)
+// Start the game (scroll to main menu)
 function startGame() {
     playSound('start-sound');
     
-    // Add exit animation to title screen
-    titleScreen.classList.add('section-exit');
-    
-    // Wait for the exit animation to complete before showing main menu
-    setTimeout(() => {
-        // Remove active class first to hide the section
-        titleScreen.classList.remove('active');
-        
-        // Show main menu
-        mainMenu.classList.add('active');
-        currentSection = 'main-menu';
-        
-        // Clean up the exit animation class after transition
-        setTimeout(() => {
-            titleScreen.classList.remove('section-exit');
-        }, 100);
-        
-        // Add animations to menu buttons with a slight delay
-        setTimeout(() => {
-            const menuItems = document.querySelectorAll('.menu-button');
-            menuItems.forEach((item, index) => {
-                item.classList.add('slide-in-right', `delay-${index * 100}`);
-            });
-        }, 100);
-    }, 800); // Timing matches the animation duration
-}
-
-// Show a specific section
-function showSection(sectionId) {
-    // Hide current section
-    sections.forEach(section => {
-        if (section.classList.contains('active')) {
-            section.classList.remove('active');
-        }
+    // Smooth scroll to main menu section
+    document.getElementById('main-menu').scrollIntoView({
+        behavior: 'smooth'
     });
-    
-    // Show requested section
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active');
-        currentSection = sectionId;
-        
-        // Add entrance animations based on section
-        if (sectionId === 'main-menu') {
-            const menuItems = document.querySelectorAll('.menu-button');
-            menuItems.forEach((item, index) => {
-                item.classList.add('slide-in-right', `delay-${index * 100}`);
-            });
-        } else {
-            // Add specific animations for each section
-            animateSectionEntrance(sectionId);
-        }
-        
-        // Scroll to top
-        window.scrollTo(0, 0);
-    }
 }
 
 // Add specific animations for each section
@@ -307,6 +295,35 @@ function toggleSound() {
     
     if (soundEnabled) {
         playSound('click-sound');
+        // Start background music if not already started
+        if (!musicStarted && backgroundMusic) {
+            backgroundMusic.play().then(() => {
+                musicStarted = true;
+                console.log('BGM started via sound toggle');
+            }).catch(e => console.log('BGM play failed:', e));
+        } else if (backgroundMusic) {
+            backgroundMusic.play().catch(e => console.log('BGM resume failed:', e));
+        }
+    } else {
+        // Pause background music
+        if (backgroundMusic) {
+            backgroundMusic.pause();
+        }
+    }
+    
+    // Store preference
+    localStorage.setItem('soundEnabled', soundEnabled);
+}
+
+// Start music on first user interaction (fallback for autoplay restrictions)
+function startMusicOnFirstInteraction() {
+    if (soundEnabled && backgroundMusic && !musicStarted) {
+        backgroundMusic.play().then(() => {
+            musicStarted = true;
+            console.log('Background music started on first user interaction');
+        }).catch(e => {
+            console.log('Failed to start background music:', e);
+        });
     }
 }
 
@@ -502,6 +519,94 @@ window.addEventListener('resize', () => {
         cursor.style.display = 'block';
     }
 });
+
+// Create anchored decorative elements
+function createAnchoredDecorations() {
+    // PNG images for floating decorations
+    const pngImages = [
+        'assets/images/confetti-images/1.png',
+        'assets/images/confetti-images/2.png',
+        'assets/images/confetti-images/3.png',
+        'assets/images/confetti-images/4.png',
+        'assets/images/confetti-images/5.png',
+        'assets/images/confetti-images/6.png',
+        'assets/images/confetti-images/7.png',
+        'assets/images/confetti-images/8.png',
+        'assets/images/confetti-images/9.png',
+        'assets/images/confetti-images/10.png',
+        'assets/images/confetti-images/11.png',
+        'assets/images/confetti-images/12.png'
+    ];
+    
+    // GIF images for static decorations
+    const gifImages = [
+        'assets/images/confetti-images/1.gif',
+        'assets/images/confetti-images/2.gif',
+        'assets/images/confetti-images/3.gif',
+        'assets/images/confetti-images/4.gif',
+        'assets/images/confetti-images/5.gif',
+        'assets/images/confetti-images/6.gif',
+        'assets/images/confetti-images/7.gif',
+        'assets/images/confetti-images/8.gif',
+        'assets/images/confetti-images/9.gif',
+        'assets/images/confetti-images/10.gif'
+    ];
+    
+    // Get all sections to anchor decorations to
+    const sections = document.querySelectorAll('.game-section');
+    const variants = ['variant-1', 'variant-2', 'variant-3', 'variant-4'];
+    const sizes = ['size-small', 'size-medium', 'size-large'];
+    
+    sections.forEach((section, sectionIndex) => {
+        // Make section position relative for absolute positioning of decorations
+        if (getComputedStyle(section).position === 'static') {
+            section.style.position = 'relative';
+        }
+        
+        // Add 2-3 PNG decorations per section (animated)
+        const pngCount = Math.floor(Math.random() * 2) + 2; // 2-3 decorations
+        for (let i = 0; i < pngCount; i++) {
+            const decoration = document.createElement('div');
+            decoration.className = 'anchored-decoration animated';
+            
+            // Random PNG image
+            const randomPng = pngImages[Math.floor(Math.random() * pngImages.length)];
+            decoration.style.backgroundImage = `url('${randomPng}')`;
+            
+            // Random variant and size
+            const randomVariant = variants[Math.floor(Math.random() * variants.length)];
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            decoration.classList.add(randomVariant, randomSize);
+            
+            // Random position within the section
+            decoration.style.left = Math.random() * 80 + 10 + '%'; // 10-90%
+            decoration.style.top = Math.random() * 70 + 15 + '%';  // 15-85%
+            
+            section.appendChild(decoration);
+        }
+        
+        // Add 1-2 GIF decorations per section (static)
+        const gifCount = Math.floor(Math.random() * 2) + 1; // 1-2 decorations
+        for (let i = 0; i < gifCount; i++) {
+            const decoration = document.createElement('div');
+            decoration.className = 'anchored-decoration static';
+            
+            // Random GIF image
+            const randomGif = gifImages[Math.floor(Math.random() * gifImages.length)];
+            decoration.style.backgroundImage = `url('${randomGif}')`;
+            
+            // Random size (no animation variant needed for static)
+            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+            decoration.classList.add(randomSize);
+            
+            // Random position within the section (different from PNGs)
+            decoration.style.right = Math.random() * 80 + 10 + '%'; // Position from right
+            decoration.style.bottom = Math.random() * 70 + 15 + '%'; // Position from bottom
+            
+            section.appendChild(decoration);
+        }
+    });
+}
 
 // Export functions for other scripts
 window.GameUI = {

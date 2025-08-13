@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Game Developer Portfolio for Shoaib Ibna Omar - Showcasing game development projects, skills, and experience">
     <title>Shoaib Ibna Omar | Game Developer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/avatar-small.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -12,10 +14,16 @@
     <link rel="preload" href="assets/sounds/button-click.mp3" as="audio">
     <link rel="preload" href="assets/sounds/hover.mp3" as="audio">
     <link rel="preload" href="assets/sounds/start.mp3" as="audio">
+    <link rel="preload" href="assets/sounds/Pixelated Dreams.mp3" as="audio">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="assets/sounds/Pixelated Dreams.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="pixel-art loading-icon"></div>
@@ -40,18 +48,18 @@
     </div>
 
     <!-- Title Screen -->
-    <section id="title-screen" class="game-section active">
+    <section id="title-screen" class="game-section">
         <div class="title-container">
             <h1 class="game-title">Shoaib Ibna Omar</h1>
             <h2 class="game-subtitle">Game Developer</h2>
             <div class="pixel-character"></div>
-            <button id="start-button" class="game-button">Press Start</button>
-            <p class="blink-text">Press ENTER or tap to continue</p>
+            <button id="start-button" class="game-button">START</button>
+            <p class="instruction-text">Click START or press ENTER</p>
         </div>
     </section>
 
     <!-- Main Menu -->
-    <section id="main-menu" class="game-section">
+    <section id="main-menu" class="game-section">`
         <div class="menu-container">
             <nav class="game-nav">
                 <ul>
