@@ -1,0 +1,24 @@
+/* This is a placeholder for the favicon.
+   In a real implementation, you would need to create an actual favicon file.
+
+   Recommended approach:
+   1. Create a pixel art icon representing Shoaib or a game controller
+   2. Save it as favicon.ico in the root directory
+   3. Create multiple sizes for different devices:
+      - favicon-16x16.png
+      - favicon-32x32.png
+      - apple-touch-icon.png (180x180)
+      - android-chrome-192x192.png
+      - android-chrome-512x512.png
+
+   Then add these links to the head of index.html:
+
+   <link rel="icon" type="image/x-icon" href="favicon.ico">
+   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+   <link rel="manifest" href="site.webmanifest">
+
+   You can use tools like Favicon Generator (https://realfavicongenerator.net/)
+   to create all the necessary files from a single source image.
+*/

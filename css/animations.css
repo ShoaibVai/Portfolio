@@ -1,0 +1,522 @@
+/* Animations for Game-themed Portfolio */
+
+/* Define RGB variables for use in animations */
+:root {
+    --primary-color-rgb: 93, 52, 175;
+    --secondary-color-rgb: 62, 137, 72;
+    --accent-color-rgb: 255, 204, 0;
+    --card-background-rgb: 255, 255, 255;
+}
+
+[data-theme="dark"] {
+    --primary-color-rgb: 126, 87, 194;
+    --secondary-color-rgb: 76, 175, 80;
+    --accent-color-rgb: 255, 221, 0;
+    --card-background-rgb: 45, 50, 90;
+}
+
+/* Keyframe Animations */
+@keyframes titleGlow {
+    0% {
+        text-shadow: 
+            0 0 5px rgba(var(--primary-color-rgb), 0.5),
+            0 0 10px rgba(var(--primary-color-rgb), 0.3);
+    }
+    100% {
+        text-shadow: 
+            0 0 10px rgba(var(--primary-color-rgb), 0.8),
+            0 0 20px rgba(var(--primary-color-rgb), 0.5),
+            0 0 30px rgba(var(--primary-color-rgb), 0.3);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { 
+        transform: scale(1); 
+        box-shadow: 0 0 0 0 rgba(var(--accent-color-rgb), 0.7);
+    }
+    50% { 
+        transform: scale(1.2); 
+        box-shadow: 0 0 0 10px rgba(var(--accent-color-rgb), 0);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(var(--accent-color-rgb), 0);
+    }
+}
+
+@keyframes progressFill {
+    0% { width: 0; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes titleScreenExit {
+    0% { 
+        transform: scale(1) rotateY(0deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.1) rotateY(90deg);
+        opacity: 0.5;
+    }
+    100% { 
+        transform: scale(0.8) rotateY(180deg);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from { 
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from { 
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromTop {
+    from { 
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    from { 
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pixelate {
+    0% {
+        filter: blur(0px);
+    }
+    25% {
+        filter: blur(1px);
+    }
+    50% {
+        filter: blur(0px);
+    }
+    75% {
+        filter: blur(2px);
+    }
+    100% {
+        filter: blur(0px);
+    }
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-5px, 5px);
+    }
+    40% {
+        transform: translate(-5px, -5px);
+    }
+    60% {
+        transform: translate(5px, 5px);
+    }
+    80% {
+        transform: translate(5px, -5px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.slide-in-left {
+    animation: slideInFromLeft 0.5s ease-out forwards;
+}
+
+.slide-in-right {
+    animation: slideInFromRight 0.5s ease-out forwards;
+}
+
+.slide-in-top {
+    animation: slideInFromTop 0.5s ease-out forwards;
+}
+
+.slide-in-bottom {
+    animation: slideInFromBottom 0.5s ease-out forwards;
+}
+
+.pixel-effect {
+    animation: pixelate 2s infinite;
+}
+
+.glitch-effect {
+    animation: glitch 0.5s infinite;
+}
+
+.rotate-animation {
+    animation: rotate 5s linear infinite;
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite alternate;
+}
+
+.float-animation {
+    animation: float 3s infinite ease-in-out;
+}
+
+/* Section Transition Animations */
+.section-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.section-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-exit {
+    animation: titleScreenExit 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-fill-mode: forwards;
+    /* Override the display:block from .active during animation */
+    display: block !important;
+}
+
+/* When section-exit is applied, it should still be visible for the animation */
+.game-section.section-exit {
+    display: block !important;
+}
+
+.section-exit-active {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Hover Effects */
+.hover-glow:hover {
+    box-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.7);
+}
+
+.hover-bounce:hover {
+    animation: pulse 0.5s ease-in-out;
+}
+
+.hover-shake:hover {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Interactive Elements Animation */
+.menu-button, .game-button, .back-button, .dialogue-option {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-button::after, 
+.game-button::after, 
+.back-button::after, 
+.dialogue-option::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent
+    );
+    transition: left 0.7s;
+}
+
+.menu-button:hover::after, 
+.game-button:hover::after, 
+.back-button:hover::after, 
+.dialogue-option:hover::after {
+    left: 100%;
+}
+
+/* Character Animation */
+.character-avatar {
+    transition: transform 0.3s;
+}
+
+.character-avatar:hover {
+    transform: scale(1.05);
+}
+
+/* Achievement Animation */
+.achievement-icon {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.achievement-icon:hover {
+    transform: rotate(15deg);
+    box-shadow: 0 0 15px rgba(var(--accent-color-rgb), 0.7);
+}
+
+/* Project Card Animation */
+.project-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+    transition: transform 0.5s;
+}
+
+/* Skill Progress Animation */
+.skill-progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+    );
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    to {
+        left: 100%;
+    }
+}
+
+/* Page Transition Effects */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    z-index: 9999;
+    transform: translateY(100%);
+    transition: transform 0.5s;
+}
+
+.page-transition.active {
+    transform: translateY(0);
+}
+
+.page-transition.exit {
+    transform: translateY(-100%);
+}
+
+/* Pixel Art Animations */
+.pixel-art {
+    image-rendering: pixelated;
+    transition: all 0.3s;
+}
+
+.pixel-art:hover {
+    transform: scale(1.1);
+}
+
+/* Loading Animation */
+.loading-progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: loading-shine 1.5s infinite;
+}
+
+@keyframes loading-shine {
+    to {
+        left: 100%;
+    }
+}
+
+/* Custom Cursor Animation */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(var(--accent-color-rgb), 0.5);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: 
+        width 0.3s,
+        height 0.3s,
+        background-color 0.3s;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor.active {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(var(--primary-color-rgb), 0.3);
+}
+
+/* Theme Toggle Animation */
+#toggle-theme {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+#toggle-theme:hover {
+    transform: rotate(45deg);
+}
+
+/* Sound Button Animation */
+#toggle-sound {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+#toggle-sound:hover {
+    transform: scale(1.2);
+}
+
+/* Hidden Elements for Animation */
+[data-animation="hidden"] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+[data-animation="visible"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delayed Animation Classes */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+.delay-900 { animation-delay: 0.9s; }
+.delay-1000 { animation-delay: 1s; }
+
+/* Responsive Animation Adjustments */
+@media (max-width: 768px) {
+    /* Reduce animation intensity for mobile devices */
+    .project-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .character-avatar:hover {
+        transform: scale(1.02);
+    }
+    
+    .achievement-icon:hover {
+        transform: rotate(5deg);
+    }
+    
+    /* Disable some animations on mobile */
+    .glitch-effect {
+        animation: none;
+    }
+    
+    .pixel-effect {
+        animation: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Respect user preference for reduced motion */
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
