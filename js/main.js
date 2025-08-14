@@ -369,37 +369,47 @@ function handleContactFormSubmit(event) {
     const emailInput = document.getElementById('email');
     const messageInput = document.getElementById('message');
     
-    // Simple validation
     if (!nameInput.value || !emailInput.value || !messageInput.value) {
         alert('Please fill in all fields');
         return;
     }
     
-    // Here you would normally send the form data to a server
-    // For this example, we'll just show a success message
     playSound('click-sound');
     
-    const formData = {
+    emailjs.send('service_uqc89hm', 'template_e73u9a5', {
         name: nameInput.value,
         email: emailInput.value,
         message: messageInput.value
-    };
-    
-    console.log('Form submitted:', formData);
-    
-    // Show success message
-    contactForm.innerHTML = `
-        <div class="success-message">
-            <h3>Message Sent!</h3>
-            <p>Thank you for your message, ${formData.name}. I'll get back to you soon!</p>
-            <button type="button" class="game-button" onclick="showSection('main-menu')">Return to Menu</button>
-        </div>
-    `;
-    
-    // Add animation to success message
-    const successMessage = document.querySelector('.success-message');
-    successMessage.classList.add('fade-in');
+    })
+    .then(function(response) {
+        console.log('EmailJS SUCCESS!', response.status, response.text);
+        contactForm.innerHTML = `
+            <div class="success-message">
+                <h3>Message Sent!</h3>
+                <p>Thank you for your message, ${nameInput.value}. I'll get back to you soon!</p>
+                <button type="button" class="game-button" onclick="showSection('main-menu')">Return to Menu</button>
+            </div>
+        `;
+        const successMessage = document.querySelector('.success-message');
+        if (successMessage) {
+            successMessage.classList.add('fade-in');
+        }
+    }, function(error) {
+        console.error('EmailJS FAILED...', error);
+        alert('Failed to send message. Error: ' + JSON.stringify(error));
+    });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize EmailJS
+    emailjs.init('nju6MOa-L6VA2UZ7Y');
+    
+    // Other initializations...
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactFormSubmit);
+    }
+});
 
 // Initialize custom cursor
 function initCustomCursor() {
@@ -464,6 +474,11 @@ function setupScrollAnimations() {
 
 // Handle keyboard navigation
 document.addEventListener('keydown', (event) => {
+    const activeElement = document.activeElement;
+    if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA' || activeElement.isContentEditable)) {
+        return;
+    }
+
     // Only handle keyboard navigation in the main menu
     if (currentSection === 'main-menu') {
         const menuItems = document.querySelectorAll('.menu-button');
@@ -606,6 +621,14 @@ function createAnchoredDecorations() {
             section.appendChild(decoration);
         }
     });
+}
+
+// Function to navigate to sections
+function showSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // Export functions for other scripts
