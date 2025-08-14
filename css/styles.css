@@ -320,8 +320,8 @@ img {
 }
 
 .pixel-character {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     background-image: url('../assets/images/avatar.png');
     background-size: cover;
     background-repeat: no-repeat;
