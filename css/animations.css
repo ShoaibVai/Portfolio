@@ -15,6 +15,36 @@
     --card-background-rgb: 45, 50, 90;
 }
 
+/* Navigation Animations */
+@keyframes navSlideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes mobileMenuSlide {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Apply navigation animations */
+#main-navigation {
+    animation: navSlideIn 0.5s ease-out;
+}
+
+.nav-menu.active {
+    animation: mobileMenuSlide 0.3s ease-out;
+}
+
 /* Keyframe Animations */
 @keyframes titleGlow {
     0% {

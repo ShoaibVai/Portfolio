@@ -2,11 +2,12 @@
 
 // DOM Elements
 const titleScreen = document.getElementById('title-screen');
-const mainMenu = document.getElementById('main-menu');
 const startButton = document.getElementById('start-button');
 const loadingScreen = document.getElementById('loading-screen');
-const menuButtons = document.querySelectorAll('.menu-button');
-const backButtons = document.querySelectorAll('.back-button');
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
+const mainNavigation = document.getElementById('main-navigation');
 const toggleThemeButton = document.getElementById('toggle-theme');
 const toggleSoundButton = document.getElementById('toggle-sound');
 const backgroundMusic = document.getElementById('background-music');
@@ -67,39 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Menu navigation
-    menuButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const sectionId = button.getAttribute('data-section');
-            playSound('click-sound');
-            
-            // Smooth scroll to the target section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Back buttons
-    backButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            playSound('click-sound');
-            
-            // Smooth scroll back to main menu
-            document.getElementById('main-menu').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
+    // Navigation functionality
+    setupNavigation();
     
     // Theme toggle
     toggleThemeButton.addEventListener('click', toggleTheme);
     
     // Sound toggle
     toggleSoundButton.addEventListener('click', toggleSound);
+    
+    // Navigation scroll effect
+    setupNavigationScrollEffect();
     
     // Contact form submission
     if (contactForm) {
@@ -203,12 +182,12 @@ function completeLoading() {
     }, 500);
 }
 
-// Start the game (scroll to main menu)
+// Start the game (scroll to about section)
 function startGame() {
     playSound('start-sound');
     
-    // Smooth scroll to main menu section
-    document.getElementById('main-menu').scrollIntoView({
+    // Smooth scroll to about section (first content section)
+    document.getElementById('about').scrollIntoView({
         behavior: 'smooth'
     });
 }
@@ -352,7 +331,7 @@ function playSound(soundId) {
 
 // Add hover sound effect to interactive elements
 function addHoverSoundToButtons() {
-    const interactiveElements = document.querySelectorAll('.game-button, .menu-button, .back-button, .dialogue-option');
+    const interactiveElements = document.querySelectorAll('.game-button, .menu-button, .back-button, .dialogue-option, .nav-link, .nav-toggle');
     
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
@@ -629,6 +608,105 @@ function showSection(sectionId) {
     if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
     }
+}
+
+// Setup navigation functionality
+function setupNavigation() {
+    // Mobile navigation toggle
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('active');
+            playSound('click-sound');
+        });
+    }
+
+    // Navigation link clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            playSound('click-sound');
+            
+            // Close mobile menu if open
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+            
+            // Smooth scroll to section
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (navMenu && navMenu.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            !navToggle.contains(e.target)) {
+            navMenu.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Handle escape key for mobile menu
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
+// Setup navigation scroll effects
+function setupNavigationScrollEffect() {
+    let lastScrollY = window.scrollY;
+    
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        
+        // Add shadow when scrolled
+        if (currentScrollY > 50) {
+            mainNavigation.classList.add('scrolled');
+        } else {
+            mainNavigation.classList.remove('scrolled');
+        }
+        
+        // Update active navigation link based on scroll position
+        updateActiveNavLink();
+        
+        lastScrollY = currentScrollY;
+    });
+}
+
+// Update active navigation link based on current section
+function updateActiveNavLink() {
+    const scrollPosition = window.scrollY + 100; // Offset for fixed nav
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            // Remove active class from all nav links
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Add active class to current section's nav link
+            const activeLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    });
 }
 
 // Export functions for other scripts

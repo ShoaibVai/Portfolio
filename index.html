@@ -47,6 +47,34 @@
         </button>
     </div>
 
+    <!-- Navigation Bar -->
+    <nav id="main-navigation" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo">
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#about" class="nav-link" aria-label="About Me">About Me</a></li>
+                    <li><a href="#skills" class="nav-link" aria-label="Skills">Skills</a></li>
+                    <li><a href="#projects" class="nav-link" aria-label="Projects">Projects</a></li>
+                    <li><a href="#achievements" class="nav-link" aria-label="Achievements">Achievements</a></li>
+                    <li><a href="#experience" class="nav-link" aria-label="Experience">Experience</a></li>
+                    <li><a href="#contact" class="nav-link" aria-label="Contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
     <!-- Title Screen -->
     <section id="title-screen" class="game-section">
         <div class="title-container">
@@ -58,28 +86,11 @@
         </div>
     </section>
 
-    <!-- Main Menu -->
-    <section id="main-menu" class="game-section">
-        <div class="menu-container">
-            <nav class="game-nav">
-                <ul>
-                    <li><button class="menu-button" data-section="about">About Me</button></li>
-                    <li><button class="menu-button" data-section="skills">Skills</button></li>
-                    <li><button class="menu-button" data-section="projects">Projects</button></li>
-                    <li><button class="menu-button" data-section="achievements">Achievements</button></li>
-                    <li><button class="menu-button" data-section="experience">Experience</button></li>
-                    <li><button class="menu-button" data-section="contact">Contact</button></li>
-                </ul>
-            </nav>
-        </div>
-    </section>
-
     <!-- About Section -->
     <section id="about" class="game-section">
         <div class="section-container">
             <div class="section-header">
                 <h2>About Me</h2>
-                <button class="back-button">Back to Menu</button>
             </div>
             <div class="game-card character-card">
                 <div class="character-avatar"></div>
@@ -110,7 +121,6 @@
         <div class="section-container">
             <div class="section-header">
                 <h2>Skill Tree</h2>
-                <button class="back-button">Back to Menu</button>
             </div>
             <div class="skill-tree-container">
                 <p class="skill-lead">Core skills: Unity, C#, ARCore, Mapbox, Java, Python, SQL — performance optimization, prototyping, and team leadership.</p>
@@ -147,7 +157,6 @@
         <div class="section-container">
             <div class="section-header">
                 <h2>Quest Log</h2>
-                <button class="back-button">Back to Menu</button>
             </div>
             <div class="projects-grid">
                 <div class="project-card">
@@ -184,7 +193,6 @@
         <div class="section-container">
             <div class="section-header">
                 <h2>Achievements</h2>
-                <button class="back-button">Back to Menu</button>
             </div>
             <div class="achievements-container">
                 <div class="achievement-card">
@@ -210,7 +218,6 @@
         <div class="section-container">
             <div class="section-header">
                 <h2>Adventure Log</h2>
-                <button class="back-button">Back to Menu</button>
             </div>
             <div class="timeline-container">
                 <div class="timeline-track"></div>
@@ -260,7 +267,6 @@
         <div class="section-container">
             <div class="section-header">
                 <h2>Contact Quest</h2>
-                <button class="back-button">Back to Menu</button>
             </div>
             <div class="contact-container">
                 <div class="dialogue-box">

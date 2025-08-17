@@ -1,5 +1,129 @@
 /* Responsive Styles for Game-themed Portfolio */
 
+/* Mobile Navigation Styles */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Mobile menu backdrop */
+    .nav-menu::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
+        z-index: -1;
+    }
+
+    .nav-menu.active::before {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 70px);
+        background-color: rgba(var(--card-background-rgb, 255, 255, 255), 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transform: translateX(-100%);
+        transition: transform var(--transition-speed) ease;
+        z-index: 999;
+        overflow-y: auto;
+        border-right: 2px solid var(--border-color);
+        box-shadow: 4px 0 20px var(--shadow-color);
+    }
+
+    .nav-menu.active {
+        transform: translateX(0);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+        padding: 2rem 0;
+        height: 100%;
+        justify-content: flex-start;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        text-align: left;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(var(--border-color-rgb, 204, 204, 204), 0.3);
+    }
+
+    .nav-link::before {
+        left: 0;
+        transform: none;
+        width: 0;
+        height: 100%;
+        background-color: rgba(var(--primary-color-rgb, 93, 52, 175), 0.1);
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+        width: 4px;
+        height: 100%;
+    }
+
+    .nav-container {
+        padding: 0 15px;
+        height: 70px;
+        gap: 1rem;
+    }
+
+    .nav-logo {
+        height: 35px;
+    }
+
+    .nav-brand {
+        min-width: 50px;
+    }
+
+    /* Adjust theme and audio controls for mobile */
+    #audio-controls {
+        top: 85px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+
+    #theme-toggle {
+        top: 85px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+    }
+
+    #toggle-sound, #toggle-theme {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    /* Adjust section padding for mobile */
+    .game-section {
+        padding: calc(var(--header-height) + 20px) 15px 20px;
+    }
+
+    #title-screen {
+        padding: 80px 15px 20px;
+    }
+}
+
 /* Base Mobile-First Approach */
 .section-container {
     padding: 15px;
@@ -32,8 +156,107 @@
     }
 }
 
-/* Medium Devices (Tablets) */
+/* Large Desktop Screens */
+@media (min-width: 1200px) {
+    .nav-container {
+        padding: 0 40px;
+        gap: 3rem;
+    }
+
+    .nav-links {
+        gap: 2rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    /* Adjust theme and audio controls for large screens */
+    #audio-controls {
+        top: 90px;
+        right: 30px;
+    }
+
+    #theme-toggle {
+        top: 90px;
+        left: 30px;
+    }
+}
+
+/* Tablet and Medium Desktop Screens */
 @media (min-width: 768px) {
+    /* Reset mobile nav styles */
+    .nav-toggle {
+        display: none;
+    }
+
+    .nav-menu {
+        position: static;
+        transform: none;
+        background-color: transparent;
+        backdrop-filter: none;
+        height: auto;
+        border: none;
+        overflow: visible;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        gap: 1.5rem;
+        padding: 0;
+        height: auto;
+    }
+
+    .nav-container {
+        padding: 0 25px;
+        gap: 1.5rem;
+    }
+
+    .nav-logo {
+        height: 38px;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+        border: none;
+        border-radius: var(--border-radius);
+    }
+
+    /* Adjust theme and audio controls for tablets */
+    #audio-controls {
+        top: 85px;
+        right: 25px;
+    }
+
+    #theme-toggle {
+        top: 85px;
+        left: 25px;
+    }
+
+    .nav-link::before {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+    }
+
+    .nav-link:hover::before,
+    .nav-link.active::before {
+        width: 80%;
+        height: 2px;
+    }
+
+    .nav-container {
+        padding: 0 20px;
+    }
+
+    .nav-logo {
+        height: 40px;
+    }
+
     .section-container {
         padding: 25px;
     }
@@ -109,6 +332,19 @@
 
 /* Large Devices (Desktops) */
 @media (min-width: 992px) {
+    .nav-links {
+        gap: 2rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    .nav-container {
+        padding: 0 30px;
+    }
+
     .section-container {
         padding: 30px;
     }
