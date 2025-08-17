@@ -856,6 +856,18 @@ img {
     text-align: center;
 }
 
+/* Core skills paragraph should match skill-category boxes */
+.skill-lead {
+    background-color: rgba(var(--card-background-rgb), 0.7);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border-color);
+    font-family: var(--game-font);
+    color: var(--text-color);
+    display: block;
+    margin-bottom: 1rem;
+}
+
 .skill-item {
     margin-bottom: 15px;
 }
