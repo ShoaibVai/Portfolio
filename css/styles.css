@@ -1370,3 +1370,30 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-color);
 }
+
+/* Intro Header */
+.main-header {
+    display: block;
+    padding: calc(var(--header-height) + 40px) 20px 20px;
+    scroll-margin-top: var(--header-height);
+}
+
+.main-header .section-container {
+    text-align: center;
+}
+
+.intro-avatar {
+    display: block;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    margin: 0 auto 1rem;
+    box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.intro-subtitle {
+    font-family: var(--game-font);
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
