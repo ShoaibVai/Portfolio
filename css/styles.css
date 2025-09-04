@@ -313,9 +313,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.5rem;
-    letter-spacing: 2px;
-    text-shadow: 3px 3px 0px var(--shadow-color);
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    text-shadow: 3px 3px 0 var(--shadow-color), -3px -3px 0 var(--accent-color);
 }
 
 h2 {
@@ -496,12 +497,13 @@ img {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: var(--card-background);
+    background: rgba(var(--card-background-rgb), 0.1);
     border: 3px solid var(--border-color);
     border-radius: var(--border-radius);
     box-shadow: 0 8px 16px var(--shadow-color);
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(5px);
 }
 
 .section-container::before {
@@ -1392,8 +1394,31 @@ footer {
     box-shadow: 0 6px 12px var(--shadow-color);
 }
 
-.intro-subtitle {
-    font-family: var(--game-font);
-    font-size: 1.2rem;
-    color: var(--secondary-color);
+.roles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
 }
+
+.role-item {
+    font-family: var(--game-font);
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.role-item:hover {
+    color: var(--accent-color);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+

@@ -57,8 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create anchored decorations after page loads
     setTimeout(createAnchoredDecorations, 1000);
     
-    // Start button event listener
-    startButton.addEventListener('click', startGame);
+    // Start button event listener (guard if not present)
+    if (startButton) {
+        startButton.addEventListener('click', startGame);
+    }
     
     // Enter key to start (PC users)
     document.addEventListener('keydown', (event) => {
@@ -72,10 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     
     // Theme toggle
-    toggleThemeButton.addEventListener('click', toggleTheme);
+    if (toggleThemeButton) {
+        toggleThemeButton.addEventListener('click', toggleTheme);
+    }
     
     // Sound toggle
-    toggleSoundButton.addEventListener('click', toggleSound);
+    if (toggleSoundButton) {
+        toggleSoundButton.addEventListener('click', toggleSound);
+    }
     
     // Navigation scroll effect
     setupNavigationScrollEffect();
@@ -167,17 +173,23 @@ function completeLoading() {
     progressBar.style.width = '100%';
     
     setTimeout(() => {
-        loadingScreen.style.opacity = '0';
+        if (loadingScreen) loadingScreen.style.opacity = '0';
         setTimeout(() => {
-            loadingScreen.style.display = 'none';
-            titleScreen.classList.add('active');
-            
-            // Add animations to title screen elements
-            document.querySelector('.game-title').classList.add('fade-in');
-            document.querySelector('.game-subtitle').classList.add('fade-in', 'delay-300');
-            document.querySelector('.pixel-character').classList.add('fade-in', 'delay-500');
-            document.querySelector('#start-button').classList.add('fade-in', 'delay-700');
-            document.querySelector('.blink-text').classList.add('fade-in', 'delay-900');
+            if (loadingScreen) loadingScreen.style.display = 'none';
+            if (titleScreen) {
+                titleScreen.classList.add('active');
+            }
+            // Add animations to title screen elements (guarded if elements exist)
+            const gameTitle = document.querySelector('.game-title');
+            if (gameTitle) gameTitle.classList.add('fade-in');
+            const gameSubtitle = document.querySelector('.game-subtitle');
+            if (gameSubtitle) gameSubtitle.classList.add('fade-in', 'delay-300');
+            const pixelChar = document.querySelector('.pixel-character');
+            if (pixelChar) pixelChar.classList.add('fade-in', 'delay-500');
+            const startBtnEl = document.querySelector('#start-button');
+            if (startBtnEl) startBtnEl.classList.add('fade-in', 'delay-700');
+            const blinkText = document.querySelector('.blink-text');
+            if (blinkText) blinkText.classList.add('fade-in', 'delay-900');
         }, 500);
     }, 500);
 }
@@ -185,11 +197,11 @@ function completeLoading() {
 // Start the game (scroll to about section)
 function startGame() {
     playSound('start-sound');
-    
-    // Smooth scroll to about section (first content section)
-    document.getElementById('about').scrollIntoView({
-        behavior: 'smooth'
-    });
+    // Smooth scroll to first content section; fallback to #skills if #about doesn't exist
+    const target = document.getElementById('about') || document.getElementById('skills');
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // Add specific animations for each section
@@ -259,7 +271,9 @@ function toggleTheme() {
 
 // Update the theme toggle icon
 function updateThemeIcon() {
+    if (!toggleThemeButton) return;
     const icon = toggleThemeButton.querySelector('i');
+    if (!icon) return;
     if (currentTheme === 'light') {
         icon.className = 'fas fa-sun';
     } else {
@@ -308,7 +322,9 @@ function startMusicOnFirstInteraction() {
 
 // Update the sound toggle icon
 function updateSoundIcon() {
+    if (!toggleSoundButton) return;
     const icon = toggleSoundButton.querySelector('i');
+    if (!icon) return;
     if (soundEnabled) {
         icon.className = 'fas fa-volume-up';
     } else {
