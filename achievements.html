@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Game Developer & AR/VR Engineer portfolio — Unity, C#, ARCore, Mapbox, AR apps and game systems. Resume, projects, achievements, and contact.">
+    <title>Shoaib Ibna Omar | Game Developer & AR/VR Engineer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/skilltree.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Preload sounds -->
+    <link rel="preload" href="assets/sounds/button-click.mp3" as="audio">
+    <link rel="preload" href="assets/sounds/hover.mp3" as="audio">
+    <link rel="preload" href="assets/sounds/start.mp3" as="audio">
+    <link rel="preload" href="assets/sounds/Pixelated Dreams.mp3" as="audio">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="assets/sounds/Pixelated Dreams.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="pixel-art loading-icon"></div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <p class="loading-text">Loading Game Assets...</p>
+    </div>
+
+    <!-- Audio Controls -->
+    <div id="audio-controls">
+        <button id="toggle-sound" aria-label="Toggle Sound">
+            <i class="fas fa-volume-up"></i>
+        </button>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div id="theme-toggle">
+        <button id="toggle-theme" aria-label="Toggle Theme">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav id="main-navigation" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo">
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html#skills" class="nav-link" aria-label="Skills">Skills</a></li>
+                    <li><a href="projects.html" class="nav-link" aria-label="Projects">Projects</a></li>
+                    <li><a href="achievements.html" class="nav-link" aria-label="Achievements">Achievements</a></li>
+                    <li><a href="blogs.html" class="nav-link" aria-label="Blogs">Blogs</a></li>
+                    <li><a href="index.html#experience" class="nav-link" aria-label="Experience">Experience</a></li>
+                    <li><a href="index.html#contact" class="nav-link" aria-label="Contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="game-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Achievements</h2>
+            </div>
+            
+            <div class="achievements-container">
+                <!-- Achievement 1 -->
+                <article class="achievement-card" data-animation="hidden">
+                    <div class="achievement-icon gold" aria-hidden="true"></div>
+                    <div class="achievement-info">
+                        <h3>Hackathon Champion — University Game Jam</h3>
+                        <p>Led a team of 5 to ship a polished prototype in 48 hours: core gameplay loop, VFX, and pitch.</p>
+                    </div>
+                </article>
+
+                <!-- Achievement 2 -->
+                <article class="achievement-card" data-animation="hidden">
+                    <div class="achievement-icon silver" aria-hidden="true"></div>
+                    <div class="achievement-info">
+                        <h3>Runner-Up — AR App Challenge</h3>
+                        <p>Built an ARCore demo with Mapbox integration; recognized for UX and tracking stability.</p>
+                    </div>
+                </article>
+
+                <!-- Achievement 3 -->
+                <article class="achievement-card" data-animation="hidden">
+                    <div class="achievement-icon bronze" aria-hidden="true"></div>
+                    <div class="achievement-info">
+                        <h3>Top Project — Department Showcase</h3>
+                        <p>Procedural dungeon prototype highlighted for system design and clean architecture.</p>
+                    </div>
+                </article>
+
+                <!-- Achievement 4 -->
+                <article class="achievement-card" data-animation="hidden">
+                    <div class="achievement-icon gold" aria-hidden="true"></div>
+                    <div class="achievement-info">
+                        <h3>Leadership — Dev Lab President</h3>
+                        <p>3 years managing a development lab: mentoring peers, project reviews, and delivery.</p>
+                    </div>
+                </article>
+
+                <!-- Achievement 5 -->
+                <article class="achievement-card" data-animation="hidden">
+                    <div class="achievement-icon silver" aria-hidden="true"></div>
+                    <div class="achievement-info">
+                        <h3>Industry — AdverGame Launch</h3>
+                        <p>Shipped mini advergames with analytics and reward loops for a gamified ad agency.</p>
+                    </div>
+                </article>
+
+                <!-- Achievement 6 -->
+                <article class="achievement-card" data-animation="hidden">
+                    <div class="achievement-icon bronze" aria-hidden="true"></div>
+                    <div class="achievement-info">
+                        <h3>Community — Open Source Contributions</h3>
+                        <p>Contributed bug fixes and small features to Unity tooling and JS utilities.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Shoaib Ibna Omar | Game Developer & AR/VR Engineer</p>
+        <p>Email: <a href="mailto:shoaibibnaomar@gmail.com">shoaibibnaomar@gmail.com</a> | Phone: (+880)1777144103</p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/shoaibibnaomar" target="_blank">Shoaib Ibna Omar</a> | GitHub: <a href="https://github.com/ShoaibVai" target="_blank">ShoaibVai</a></p>
+        <p class="pixel-text">Made with ❤️ and a lot of ☕</p>
+        <p class="small-muted">References available on request — Professor Dr. Sheak Rashed Haider, Noori Md Hasanuzzaman Dipu</p>
+    </footer>
+
+    <!-- Audio Elements -->
+    <audio id="click-sound" preload="auto">
+        <source src="assets/sounds/button-click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="hover-sound" preload="auto">
+        <source src="assets/sounds/hover.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="start-sound" preload="auto">
+        <source src="assets/sounds/start.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/skilltree.js" defer></script>
+    <script src="js/sounds.js" defer></script>
+    <script src="js/pingpong.js" defer></script>
+</body>
+</html>

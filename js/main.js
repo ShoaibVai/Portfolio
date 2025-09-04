@@ -746,24 +746,26 @@ function setupNavigation() {
     // Navigation link clicks
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
+            const href = link.getAttribute('href') || '';
+            const isHashLink = href.startsWith('#');
+
             playSound('click-sound');
-            
+
             // Close mobile menu if open
             if (navMenu && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
                 navToggle.setAttribute('aria-expanded', 'false');
             }
-            
-            // Smooth scroll to section
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+
+            if (isHashLink) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            } else {
+                // let browser navigate for non-hash links (e.g., projects.html)
             }
         });
     });

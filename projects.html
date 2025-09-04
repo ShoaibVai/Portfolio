@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Game Developer & AR/VR Engineer portfolio — Unity, C#, ARCore, Mapbox, AR apps and game systems. Resume, projects, and contact.">
+    <title>Shoaib Ibna Omar | Game Developer & AR/VR Engineer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/skilltree.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Preload sounds -->
+    <link rel="preload" href="assets/sounds/button-click.mp3" as="audio">
+    <link rel="preload" href="assets/sounds/hover.mp3" as="audio">
+    <link rel="preload" href="assets/sounds/start.mp3" as="audio">
+    <link rel="preload" href="assets/sounds/Pixelated Dreams.mp3" as="audio">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="assets/sounds/Pixelated Dreams.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="pixel-art loading-icon"></div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <p class="loading-text">Loading Game Assets...</p>
+    </div>
+
+    <!-- Audio Controls -->
+    <div id="audio-controls">
+        <button id="toggle-sound" aria-label="Toggle Sound">
+            <i class="fas fa-volume-up"></i>
+        </button>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div id="theme-toggle">
+        <button id="toggle-theme" aria-label="Toggle Theme">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav id="main-navigation" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo">
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="index.html#skills" class="nav-link" aria-label="Skills">Skills</a></li>
+                    <li><a href="projects.html" class="nav-link" aria-label="Projects">Projects</a></li>
+                    <li><a href="achievements.html" class="nav-link" aria-label="Achievements">Achievements</a></li>
+                    <li><a href="blogs.html" class="nav-link" aria-label="Blogs">Blogs</a></li>
+                    <li><a href="index.html#experience" class="nav-link" aria-label="Experience">Experience</a></li>
+                    <li><a href="index.html#contact" class="nav-link" aria-label="Contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Projects Section -->
+    <section id="projects" class="game-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Projects</h2>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <article class="project-card" data-animation="hidden">
+                    <div class="project-image" style="background-image: url('assets/images/avatar.png');"></div>
+                    <div class="project-info">
+                        <div class="project-type">AR | Unity</div>
+                        <h3>AR Treasure Hunt</h3>
+                        <p class="project-description">Location-based AR scavenger hunt using ARCore and Mapbox. Designed game loops, optimized tracking, and built content pipeline.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Unity</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">ARCore</span>
+                            <span class="tech-badge">Mapbox</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="game-button" target="_blank" rel="noopener">Live Demo</a>
+                            <a href="https://github.com/ShoaibVai" class="game-button" target="_blank" rel="noopener">Source</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card" data-animation="hidden">
+                    <div class="project-image" style="background-image: url('assets/images/logo.png');"></div>
+                    <div class="project-info">
+                        <div class="project-type">Game | Systems</div>
+                        <h3>Procedural Dungeon</h3>
+                        <p class="project-description">Rogue-lite prototype with procedural level generation, combat tuning, and save/load. Focused on clean architecture and ECS patterns.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Unity</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">ECS</span>
+                            <span class="tech-badge">Design</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="game-button" target="_blank" rel="noopener">Trailer</a>
+                            <a href="https://github.com/ShoaibVai" class="game-button" target="_blank" rel="noopener">Source</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card" data-animation="hidden">
+                    <div class="project-image" style="background-image: url('assets/images/avatar-small.png');"></div>
+                    <div class="project-info">
+                        <div class="project-type">VR | Experience</div>
+                        <h3>VR Museum Tour</h3>
+                        <p class="project-description">Immersive museum walkthrough with diegetic UI and gaze-based interactions. Built for performance on standalone headsets.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Unity</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">VR</span>
+                            <span class="tech-badge">Optimization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="game-button" target="_blank" rel="noopener">Overview</a>
+                            <a href="https://github.com/ShoaibVai" class="game-button" target="_blank" rel="noopener">Source</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-card" data-animation="hidden">
+                    <div class="project-image" style="background-image: url('assets/images/logo.png');"></div>
+                    <div class="project-info">
+                        <div class="project-type">AdverGame</div>
+                        <h3>Mini Runner</h3>
+                        <p class="project-description">Fast-build advergame template used in a gamified ad agency. Integrated analytics events and A/B tested reward loops.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Unity</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">Firebase</span>
+                            <span class="tech-badge">UX</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="game-button" target="_blank" rel="noopener">Play</a>
+                            <a href="https://github.com/ShoaibVai" class="game-button" target="_blank" rel="noopener">Source</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="project-card" data-animation="hidden">
+                    <div class="project-image" style="background-image: url('assets/images/avatar.png');"></div>
+                    <div class="project-info">
+                        <div class="project-type">Gameplay</div>
+                        <h3>Platformer Toolkit</h3>
+                        <p class="project-description">Reusable 2D platformer toolkit: coyote time, variable jump, state machine, camera rigs, and editor tooling.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Unity</span>
+                            <span class="tech-badge">C#</span>
+                            <span class="tech-badge">Cinemachine</span>
+                            <span class="tech-badge">Tools</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="game-button" target="_blank" rel="noopener">Demo</a>
+                            <a href="https://github.com/ShoaibVai" class="game-button" target="_blank" rel="noopener">Source</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 6 -->
+                <article class="project-card" data-animation="hidden">
+                    <div class="project-image" style="background-image: url('assets/images/logo.png');"></div>
+                    <div class="project-info">
+                        <div class="project-type">Fun</div>
+                        <h3>Pixel Ping-Pong</h3>
+                        <p class="project-description">The subtle background game you see on this site. Theme-aware colors, AI paddles, and a clean render loop.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Canvas</span>
+                            <span class="tech-badge">JavaScript</span>
+                            <span class="tech-badge">Game Loop</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="game-button" target="_blank" rel="noopener">Read</a>
+                            <a href="https://github.com/ShoaibVai" class="game-button" target="_blank" rel="noopener">Source</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Shoaib Ibna Omar | Game Developer & AR/VR Engineer</p>
+        <p>Email: <a href="mailto:shoaibibnaomar@gmail.com">shoaibibnaomar@gmail.com</a> | Phone: (+880)1777144103</p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/shoaibibnaomar" target="_blank">Shoaib Ibna Omar</a> | GitHub: <a href="https://github.com/ShoaibVai" target="_blank">ShoaibVai</a></p>
+        <p class="pixel-text">Made with ❤️ and a lot of ☕</p>
+        <p class="small-muted">References available on request — Professor Dr. Sheak Rashed Haider, Noori Md Hasanuzzaman Dipu</p>
+    </footer>
+
+    <!-- Audio Elements -->
+    <audio id="click-sound" preload="auto">
+        <source src="assets/sounds/button-click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="hover-sound" preload="auto">
+        <source src="assets/sounds/hover.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="start-sound" preload="auto">
+        <source src="assets/sounds/start.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/animations.js" defer></script>
+    <script src="js/skilltree.js" defer></script>
+    <script src="js/sounds.js" defer></script>
+    <script src="js/pingpong.js" defer></script>
+</body>
+</html>

@@ -390,11 +390,12 @@ img {
     width: 380px;
     max-width: 52vw;
     min-width: 300px;
-    padding: 10px 14px;
-    background: rgba(var(--card-background-rgb), 0.85);
-    border: 2px solid var(--border-color);
+    padding: 14px 18px;
+    /* stronger contrast while still theme-aware */
+    background: rgba(var(--card-background-rgb), 0.96);
+    border: 2px solid rgba(var(--border-color-rgb), 0.9);
     border-radius: 14px;
-    box-shadow: 0 6px 16px var(--shadow-color);
+    box-shadow: 0 10px 30px var(--shadow-color);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     animation: slideInUp var(--transition-speed) ease-out;
@@ -417,9 +418,12 @@ img {
 .side-note-content { max-height: 500px; overflow: hidden; transition: max-height var(--transition-speed) ease, opacity var(--transition-speed) ease; }
 .side-note-text {
     font-family: var(--game-font);
-    font-size: 0.95rem;
+    font-size: 1.075rem;
+    font-weight: 400;
     color: var(--text-color);
-    line-height: 1.4;
+    line-height: 1.45;
+    /* subtle glow / outline for readability across themes */
+    text-shadow: 0 1px 0 rgba(0,0,0,0.35), 0 0 6px rgba(0,0,0,0.06);
 }
 
 .side-note.hidden { opacity: 0; transform: scale(0.9) translateY(-6px); pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; }
@@ -1456,19 +1460,31 @@ footer {
 
 /* Intro Header */
 .main-header {
-    display: block;
-    padding: calc(var(--header-height) + 40px) 20px 20px;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: calc(var(--header-height) + 40px) 20px 40px;
     scroll-margin-top: var(--header-height);
 }
 
+/* Remove card look just for the header container */
 .main-header .section-container {
     text-align: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0 20px;
+    overflow: visible; /* allow overlays like the note */
 }
+
+.main-header .section-container::before { display: none; }
 
 .intro-avatar {
     display: block;
-    width: 180px;
-    height: 180px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
     border: 3px solid var(--primary-color);
     margin: 0 auto 1rem;
@@ -1500,6 +1516,21 @@ footer {
 .role-item:hover {
     color: var(--accent-color);
     box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+/* Start CTA in hero */
+.start-cta {
+    margin-top: 2rem;
+}
+.start-button {
+    font-size: 1.1rem;
+    padding: 14px 28px;
+}
+.start-hint {
+    font-family: var(--game-font);
+    color: rgba(var(--text-color-rgb), 0.8);
+    margin-top: 10px;
+    font-size: 1rem;
 }
 
 /* Responsive: stack note below roles on small screens */
