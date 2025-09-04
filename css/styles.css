@@ -372,6 +372,63 @@ img {
     height: auto;
 }
 
+/* Side Note Bubble (overlay beside roles without shifting layout) */
+.intro-roles-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.side-note {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 12px);
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 380px;
+    max-width: 52vw;
+    min-width: 300px;
+    padding: 10px 14px;
+    background: rgba(var(--card-background-rgb), 0.85);
+    border: 2px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 6px 16px var(--shadow-color);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: slideInUp var(--transition-speed) ease-out;
+    z-index: 2;
+}
+
+.side-note::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(var(--card-background-rgb), 0.85);
+}
+
+.side-note-content { max-height: 500px; overflow: hidden; transition: max-height var(--transition-speed) ease, opacity var(--transition-speed) ease; }
+.side-note-text {
+    font-family: var(--game-font);
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.side-note.hidden { opacity: 0; transform: scale(0.9) translateY(-6px); pointer-events: none; transition: opacity 0.35s ease, transform 0.35s ease; }
+
+@keyframes slideInUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 /* Loading Screen */
 #loading-screen {
     position: fixed;
@@ -919,6 +976,30 @@ img {
     display: block;
 }
 
+/* Countdown timer bar inside the bubble */
+.side-note-timer {
+    width: 100%;
+    height: 6px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 6px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+.side-note-timer-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    transition: width 0.2s linear;
+}
+
+/* disappearing animation */
+.side-note.hidden {
+    opacity: 0;
+    transform: scale(0.9) translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
 /* Projects Section */
 .projects-grid {
     display: grid;
@@ -1419,6 +1500,25 @@ footer {
 .role-item:hover {
     color: var(--accent-color);
     box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+/* Responsive: stack note below roles on small screens */
+@media (max-width: 768px) {
+    .intro-roles-wrapper {
+        display: block;
+    }
+    .side-note {
+        position: static;
+        transform: none;
+        margin-top: 0.75rem;
+        max-width: 100%;
+    }
+    .side-note::after { display: none; }
+}
+
+/* Ensure header allows overlay to be visible */
+.main-header .section-container {
+    overflow: visible;
 }
 
 

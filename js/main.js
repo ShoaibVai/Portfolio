@@ -530,6 +530,111 @@ window.addEventListener('resize', () => {
     }
 });
 
+// Initialize side note toggle and persistence
+function initSideNoteToggle() {
+    const sideNote = document.querySelector('.side-note');
+    const toggleBtn = document.querySelector('.side-note-toggle');
+    if (!sideNote || !toggleBtn) return;
+
+    // Restore state
+    const saved = localStorage.getItem('sideNoteMinimized');
+    const isMinimized = saved === 'true';
+    if (isMinimized) {
+        sideNote.classList.add('minimized');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        const icon = toggleBtn.querySelector('i');
+    if (icon) icon.className = 'fas fa-plus';
+    toggleBtn.title = 'Expand';
+    toggleBtn.setAttribute('aria-label', 'Expand note');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        const nowMin = !sideNote.classList.contains('minimized');
+        sideNote.classList.toggle('minimized');
+        localStorage.setItem('sideNoteMinimized', String(nowMin));
+        toggleBtn.setAttribute('aria-expanded', String(!nowMin));
+        const icon = toggleBtn.querySelector('i');
+    if (icon) icon.className = nowMin ? 'fas fa-plus' : 'fas fa-minus';
+    toggleBtn.title = nowMin ? 'Expand' : 'Minimize';
+    toggleBtn.setAttribute('aria-label', nowMin ? 'Expand note' : 'Minimize note');
+        playSound('click-sound');
+    });
+}
+
+// Countdown and auto-hide for side note
+(function setupSideNoteTimer(){
+    const sideNote = document.querySelector('.side-note');
+    const timerBar = document.getElementById('side-note-timer-bar');
+    if (!sideNote || !timerBar) return;
+
+    const DURATION_MS = 20000; // 20 seconds
+    let timeoutId = null;
+    let startTime = null;
+
+    function startTimer() {
+        // Reset classes
+        sideNote.classList.remove('hidden');
+        timerBar.style.width = '100%';
+        startTime = performance.now();
+
+        // Animate via requestAnimationFrame for smoothness
+        function tick(now) {
+            const elapsed = now - startTime;
+            const ratio = Math.min(1, elapsed / DURATION_MS);
+            timerBar.style.width = `${(1 - ratio) * 100}%`;
+
+            if (ratio < 1) {
+                requestAnimationFrame(tick);
+            } else {
+                // hide bubble
+                sideNote.classList.add('hidden');
+                // clear minimized state so toggle reflects collapsed
+                sideNote.classList.add('minimized');
+                const toggleBtn = sideNote.querySelector('.side-note-toggle');
+                if (toggleBtn) {
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    const icon = toggleBtn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-plus';
+                }
+            }
+        }
+
+        requestAnimationFrame(tick);
+
+        // Also ensure a hard timeout in case rAF stalls
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            sideNote.classList.add('hidden');
+        }, DURATION_MS + 500);
+    }
+
+    // Start only if not minimized at load
+    const persisted = localStorage.getItem('sideNoteMinimized');
+    if (persisted !== 'true') {
+        // small delay so user sees it after page animations
+        setTimeout(startTimer, 700);
+    }
+
+    // If user toggles open, restart the timer
+    const toggleBtn = sideNote.querySelector('.side-note-toggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            const isNowMin = sideNote.classList.contains('minimized');
+            if (!isNowMin) {
+                // opened, restart timer
+                startTimer();
+                sideNote.classList.remove('hidden');
+                // also remove minimized flag in storage
+                localStorage.setItem('sideNoteMinimized', 'false');
+            } else {
+                // user minimized, stop timers
+                clearTimeout(timeoutId);
+                timerBar.style.width = '100%';
+            }
+        });
+    }
+})();
+
 // Create anchored decorative elements
 function createAnchoredDecorations() {
     // PNG images for floating decorations
