@@ -391,13 +391,13 @@ img {
     max-width: 52vw;
     min-width: 300px;
     padding: 14px 18px;
-    /* stronger contrast while still theme-aware */
-    background: rgba(var(--card-background-rgb), 0.96);
-    border: 2px solid rgba(var(--border-color-rgb), 0.9);
+    /* glassy, transparent look while theme-aware */
+    background: rgba(var(--card-background-rgb), 0.28);
+    border: 2px solid rgba(var(--border-color-rgb), 0.45);
     border-radius: 14px;
     box-shadow: 0 10px 30px var(--shadow-color);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     animation: slideInUp var(--transition-speed) ease-out;
     z-index: 2;
 }
@@ -412,7 +412,7 @@ img {
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 10px solid rgba(var(--card-background-rgb), 0.85);
+    border-right: 10px solid rgba(var(--card-background-rgb), 0.28);
 }
 
 .side-note-content { max-height: 500px; overflow: hidden; transition: max-height var(--transition-speed) ease, opacity var(--transition-speed) ease; }
