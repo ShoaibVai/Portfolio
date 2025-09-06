@@ -951,12 +951,22 @@ function initAvatarVisualizer() {
     let gradientCacheKey = null;
     let gradient = null;
     function getGradient() {
-        const key = width + 'x' + height;
+        const key = width + 'x' + height + '_' + document.body.getAttribute('data-theme');
         if (gradient && key === gradientCacheKey) return gradient;
         gradientCacheKey = key;
         gradient = ctx.createLinearGradient(0, 0, width, height);
-        gradient.addColorStop(0, '#bb86fc');
-        gradient.addColorStop(1, '#03dac6');
+        
+        // Theme-aware colors
+        const isDark = document.body.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            // Dark theme: bright colors
+            gradient.addColorStop(0, '#bb86fc');
+            gradient.addColorStop(1, '#03dac6');
+        } else {
+            // Light theme: darker, more visible colors
+            gradient.addColorStop(0, '#5d34af'); // Primary color
+            gradient.addColorStop(1, '#3e8948'); // Secondary color
+        }
         return gradient;
     }
 
@@ -995,7 +1005,13 @@ function initAvatarVisualizer() {
             const outerX = cos * (baseRadius + barLen);
             const outerY = sin * (baseRadius + barLen);
             ctx.strokeStyle = g;
-            ctx.globalAlpha = 0.35 + val * 0.65; // fade
+            
+            // Theme-aware opacity
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            const baseOpacity = isDark ? 0.35 : 0.5; // Higher opacity for light theme
+            const maxOpacity = isDark ? 0.65 : 0.85;
+            ctx.globalAlpha = baseOpacity + val * maxOpacity;
+            
             ctx.beginPath();
             ctx.moveTo(innerX, innerY);
             ctx.lineTo(outerX, outerY);

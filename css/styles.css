@@ -1648,6 +1648,17 @@ footer {
     filter: drop-shadow(0 0 6px rgba(var(--accent-color-rgb,187,134,252),0.35));
 }
 
+/* Theme-specific visualizer effects */
+[data-theme="light"] #avatar-visualizer {
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 0 8px rgba(var(--primary-color-rgb,93,52,175),0.4));
+}
+
+[data-theme="dark"] #avatar-visualizer {
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 6px rgba(var(--accent-color-rgb,187,134,252),0.35));
+}
+
 .avatar-visualizer-wrapper .intro-avatar {
     position: relative;
     z-index: 2; /* In front of the canvas */
