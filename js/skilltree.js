@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  let currentPhase = 1;
+  let currentPhase = null; // Start with no active phase
   const totalPhases = timelineData.length;
 
   // Generate timeline items
@@ -83,14 +83,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.timeline-bubble').forEach(element => {
       element.addEventListener('click', function() {
         const phase = parseInt(this.closest('.timeline-item').dataset.phase);
-        setActivePhase(phase);
+        const isCurrentlyActive = this.closest('.timeline-item').classList.contains('active');
+
+        if (isCurrentlyActive) {
+          // If already active, collapse it by setting no active phase
+          setActivePhase(null);
+        } else {
+          // If not active, make it active
+          setActivePhase(phase);
+        }
       });
 
       element.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           const phase = parseInt(this.closest('.timeline-item').dataset.phase);
-          setActivePhase(phase);
+          const isCurrentlyActive = this.closest('.timeline-item').classList.contains('active');
+
+          if (isCurrentlyActive) {
+            // If already active, collapse it by setting no active phase
+            setActivePhase(null);
+          } else {
+            // If not active, make it active
+            setActivePhase(phase);
+          }
         }
       });
     });
@@ -102,7 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update active state
     document.querySelectorAll('.timeline-item').forEach(item => {
-      if (parseInt(item.dataset.phase) === phase) {
+      if (phase === null) {
+        // Collapse all phases
+        item.classList.remove('active');
+        item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'false');
+      } else if (parseInt(item.dataset.phase) === phase) {
         item.classList.add('active');
         item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'true');
       } else {
@@ -113,7 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update progress dots
     progressDots.forEach((dot, index) => {
-      if (index < phase) {
+      if (phase === null) {
+        dot.classList.remove('active');
+      } else if (index < phase) {
         dot.classList.add('active');
       } else {
         dot.classList.remove('active');
@@ -121,33 +143,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Update button states
-    prevBtn.disabled = phase === 1;
-    nextBtn.disabled = phase === totalPhases;
+    prevBtn.disabled = phase === null || phase === 1;
+    nextBtn.disabled = phase === null || phase === totalPhases;
   }
 
   // Button event listeners
   prevBtn.addEventListener('click', () => {
-    if (currentPhase > 1) {
+    if (currentPhase === null) {
+      setActivePhase(totalPhases); // If collapsed, go to last phase
+    } else if (currentPhase > 1) {
       setActivePhase(currentPhase - 1);
     }
   });
 
   nextBtn.addEventListener('click', () => {
-    if (currentPhase < totalPhases) {
+    if (currentPhase === null) {
+      setActivePhase(1); // If collapsed, go to first phase
+    } else if (currentPhase < totalPhases) {
       setActivePhase(currentPhase + 1);
     }
   });
 
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft' && currentPhase > 1) {
-      setActivePhase(currentPhase - 1);
-    } else if (e.key === 'ArrowRight' && currentPhase < totalPhases) {
-      setActivePhase(currentPhase + 1);
+    if (e.key === 'ArrowLeft') {
+      if (currentPhase === null) {
+        setActivePhase(totalPhases); // If collapsed, go to last phase
+      } else if (currentPhase > 1) {
+        setActivePhase(currentPhase - 1);
+      }
+    } else if (e.key === 'ArrowRight') {
+      if (currentPhase === null) {
+        setActivePhase(1); // If collapsed, go to first phase
+      } else if (currentPhase < totalPhases) {
+        setActivePhase(currentPhase + 1);
+      }
     }
   });
 
   // Initialize timeline
   generateTimeline();
-  setActivePhase(1); // Ensure first phase is active
+  setActivePhase(null); // Start with all phases collapsed
 });
