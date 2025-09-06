@@ -535,6 +535,12 @@
     }
 }
 
+/* Mobile override: prevent control buttons overlapping nav (place beneath 70px nav) */
+@media (max-width: 767px) {
+    #audio-controls { top: 78px !important; right: 16px; }
+    #theme-toggle { top: 78px !important; left: 16px; }
+}
+
 /* Tablet-specific Adjustments */
 @media (min-width: 768px) and (max-width: 991px) {
     .projects-grid {
