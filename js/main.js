@@ -34,19 +34,35 @@ document.addEventListener('DOMContentLoaded', () => {
         soundEnabled = savedSoundPreference === 'true';
         updateSoundIcon();
     }
+    if (backgroundMusic) {
+        // Start muted (autoplay) but if user had sound enabled previously, unmute after interaction or toggle
+        backgroundMusic.muted = true;
+        console.log('Background music initialized:', {
+            src: backgroundMusic.src,
+            muted: backgroundMusic.muted,
+            autoplay: backgroundMusic.autoplay,
+            loop: backgroundMusic.loop,
+            soundEnabled: soundEnabled
+        });
+        if (!soundEnabled) {
+            // keep muted
+        }
+    }
     
     // Start background music automatically if sound is enabled
     if (soundEnabled && backgroundMusic) {
+        console.log('Attempting to start background music...', { soundEnabled, musicStarted });
         // Add a small delay to ensure the audio element is ready
         setTimeout(() => {
+            console.log('Background music element:', backgroundMusic, 'Muted:', backgroundMusic.muted);
             backgroundMusic.play().then(() => {
                 musicStarted = true;
+                // If it started muted due to autoplay policy, keep muted until user interaction
                 console.log('Background music started automatically');
             }).catch(e => {
                 console.log('Auto-play prevented by browser, will start on first user interaction:', e);
                 // Add event listener for first user interaction
-                document.addEventListener('click', startMusicOnFirstInteraction, { once: true });
-                document.addEventListener('keydown', startMusicOnFirstInteraction, { once: true });
+                addDeferredAudioStartHandlers();
             });
         }, 500);
     }
@@ -101,6 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Set up intersection observers for scroll animations
     setupScrollAnimations();
+
+    // Initialize avatar audio visualizer
+    initAvatarVisualizer();
 });
 
 // Preload assets
@@ -283,6 +302,7 @@ function updateThemeIcon() {
 
 // Toggle sound on/off
 function toggleSound() {
+    console.log('Toggle sound clicked. Current state:', { soundEnabled, musicStarted });
     soundEnabled = !soundEnabled;
     updateSoundIcon();
     
@@ -290,16 +310,23 @@ function toggleSound() {
         playSound('click-sound');
         // Start background music if not already started
         if (!musicStarted && backgroundMusic) {
+            console.log('Starting background music via toggle...');
+            backgroundMusic.muted = false;
             backgroundMusic.play().then(() => {
                 musicStarted = true;
                 console.log('BGM started via sound toggle');
             }).catch(e => console.log('BGM play failed:', e));
         } else if (backgroundMusic) {
-            backgroundMusic.play().catch(e => console.log('BGM resume failed:', e));
+            console.log('Resuming background music via toggle...');
+            backgroundMusic.muted = false;
+            if (backgroundMusic.paused) {
+                backgroundMusic.play().catch(e => console.log('BGM resume failed:', e));
+            }
         }
     } else {
         // Pause background music
         if (backgroundMusic) {
+            console.log('Pausing background music via toggle...');
             backgroundMusic.pause();
         }
     }
@@ -310,14 +337,29 @@ function toggleSound() {
 
 // Start music on first user interaction (fallback for autoplay restrictions)
 function startMusicOnFirstInteraction() {
+    console.log('First interaction handler triggered', { soundEnabled, musicStarted });
     if (soundEnabled && backgroundMusic && !musicStarted) {
+        console.log('Attempting to start music on first interaction...');
+        backgroundMusic.muted = false; // unmute first
         backgroundMusic.play().then(() => {
             musicStarted = true;
             console.log('Background music started on first user interaction');
         }).catch(e => {
             console.log('Failed to start background music:', e);
         });
+    } else if (soundEnabled && backgroundMusic && musicStarted && backgroundMusic.muted) {
+        // Music already started but muted, just unmute
+        backgroundMusic.muted = false;
+        console.log('Background music unmuted on first interaction');
     }
+}
+
+// Attach one-time handlers to attempt starting audio (and later visualizer context)
+function addDeferredAudioStartHandlers() {
+    const handlers = ['click', 'keydown', 'touchstart'];
+    handlers.forEach(evt => {
+        document.addEventListener(evt, startMusicOnFirstInteraction, { once: true, passive: true });
+    });
 }
 
 // Update the sound toggle icon
@@ -839,3 +881,128 @@ window.GameUI = {
     toggleTheme,
     toggleSound
 };
+
+/* ==========================
+   Radial Avatar Audio Visualizer
+   ========================== */
+function initAvatarVisualizer() {
+    const canvas = document.getElementById('avatar-visualizer');
+    if (!canvas) return; // not on this page
+    const audioEl = backgroundMusic; // existing reference
+    if (!audioEl) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height, centerX, centerY, baseRadius;
+
+    function resize() {
+        const dpr = window.devicePixelRatio || 1;
+        // Keep intrinsic canvas size in sync for crisp lines
+        width = canvas.clientWidth * dpr;
+        height = canvas.clientHeight * dpr;
+        canvas.width = width;
+        canvas.height = height;
+        centerX = width / 2;
+        centerY = height / 2;
+        baseRadius = Math.min(width, height) * 0.32; // tighter to avatar edge
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let analyser = null;
+    let sourceNode = null;
+    let freqData = null;
+    let started = false;
+
+    function buildAudioGraph() {
+        if (started || !AudioCtx) return;
+        try {
+            audioCtx = new AudioCtx();
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 256; // 128 usable bins
+            sourceNode = audioCtx.createMediaElementSource(audioEl);
+            sourceNode.connect(analyser);
+            // Connect to destination so music still plays
+            analyser.connect(audioCtx.destination);
+            freqData = new Uint8Array(analyser.frequencyBinCount);
+            started = true;
+        } catch (e) {
+            console.warn('Visualizer audio graph failed:', e);
+        }
+    }
+
+    // Attempt to build when music plays (handles autoplay restrictions)
+    audioEl.addEventListener('play', () => {
+        if (!started) {
+            buildAudioGraph();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume().catch(()=>{});
+        }
+    });
+
+    // If already playing when we load
+    if (!audioEl.paused) {
+        buildAudioGraph();
+    }
+
+    // Precompute gradient cache per size
+    let gradientCacheKey = null;
+    let gradient = null;
+    function getGradient() {
+        const key = width + 'x' + height;
+        if (gradient && key === gradientCacheKey) return gradient;
+        gradientCacheKey = key;
+        gradient = ctx.createLinearGradient(0, 0, width, height);
+        gradient.addColorStop(0, '#bb86fc');
+        gradient.addColorStop(1, '#03dac6');
+        return gradient;
+    }
+
+    // Simple smoothing buffer
+    const smooth = []; // store previous values
+    function smoothedVal(i, v) {
+        const alpha = 0.6; // higher -> smoother
+        smooth[i] = smooth[i] == null ? v : smooth[i] * alpha + v * (1 - alpha);
+        return smooth[i];
+    }
+
+    function render() {
+        requestAnimationFrame(render);
+        if (!started) return; // nothing yet
+        analyser.getByteFrequencyData(freqData);
+        ctx.clearRect(0, 0, width, height);
+        ctx.save();
+        ctx.translate(centerX, centerY);
+
+        const bars = 96; // subset of bins for clarity
+        const step = Math.floor(freqData.length / bars);
+        const maxBar = baseRadius * 0.25; // much shorter bars to stay within frame
+        const g = getGradient();
+        ctx.lineCap = 'round';
+
+        for (let i = 0; i < bars; i++) {
+            const raw = freqData[i * step] / 255; // 0..1
+            const eased = raw * raw; // quadratic ease for subtle small values
+            const val = smoothedVal(i, eased);
+            const barLen = 4 + val * maxBar; // smaller minimum length too
+            const angle = (i / bars) * Math.PI * 2;
+            const cos = Math.cos(angle);
+            const sin = Math.sin(angle);
+            const innerX = cos * baseRadius;
+            const innerY = sin * baseRadius;
+            const outerX = cos * (baseRadius + barLen);
+            const outerY = sin * (baseRadius + barLen);
+            ctx.strokeStyle = g;
+            ctx.globalAlpha = 0.35 + val * 0.65; // fade
+            ctx.beginPath();
+            ctx.moveTo(innerX, innerY);
+            ctx.lineTo(outerX, outerY);
+            ctx.lineWidth = 1.5 + val * 2.5; // thinner bars
+            ctx.stroke();
+        }
+        ctx.restore();
+    }
+    render();
+}

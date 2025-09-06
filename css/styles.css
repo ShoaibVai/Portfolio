@@ -1626,6 +1626,43 @@ footer {
     box-shadow: 0 6px 12px var(--shadow-color);
 }
 
+/* Radial Audio Visualizer */
+.avatar-visualizer-wrapper {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#avatar-visualizer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; /* Behind the image */
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 6px rgba(var(--accent-color-rgb,187,134,252),0.35));
+}
+
+.avatar-visualizer-wrapper .intro-avatar {
+    position: relative;
+    z-index: 2; /* In front of the canvas */
+}
+
+@media (min-width: 768px) {
+    .avatar-visualizer-wrapper { width: 300px; height: 300px; }
+    .avatar-visualizer-wrapper .intro-avatar { width: 260px; height: 260px; }
+}
+
+@media (min-width: 1200px) {
+    .avatar-visualizer-wrapper { width: 340px; height: 340px; }
+    .avatar-visualizer-wrapper .intro-avatar { width: 300px; height: 300px; }
+}
+
 .roles-container {
     display: flex;
     flex-wrap: wrap;
