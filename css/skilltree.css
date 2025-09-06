@@ -12,6 +12,35 @@
   overflow: visible;
 }
 
+/* Timeline subtitle styling */
+.timeline-subtitle {
+  font-family: var(--pixel-font);
+  font-size: 10px;
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 8px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  animation: subtitleGlow 2s ease-in-out infinite alternate;
+  text-align: right;
+}
+
+.timeline-form-text {
+  font-size: 12px;
+  font-weight: normal;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+@keyframes subtitleGlow {
+  from {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3), 0 0 5px var(--secondary-color);
+  }
+  to {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3), 0 0 10px var(--secondary-color), 0 0 15px var(--secondary-color);
+  }
+}
+
 /* Scanline effect for retro feel */
 .timeline-container::before {
   content: "";
