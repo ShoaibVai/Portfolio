@@ -1,109 +1,153 @@
-// Minimal Skill Tree interactivity: draw lines, hover, expand/collapse panels
+// Retro Gaming Timeline interactivity
 document.addEventListener('DOMContentLoaded', () => {
-  const svg = document.querySelector('.skill-tree-svg');
-  const nodes = Array.from(document.querySelectorAll('.skill-node'));
-  const center = document.querySelector('.skill-center');
+  // Timeline data
+  const timelineData = [
+    {
+      phase: 1,
+      title: "IDEATION",
+      skills: ["Business analysis", "Market analysis", "Product Research"],
+      tools: ["Miro", "Figma", "Google Analytics", "SEMrush", "SurveyMonkey"]
+    },
+    {
+      phase: 2,
+      title: "DOCUMENTATION",
+      skills: ["Business Model", "Game Design Document", "Software Requirement Specification"],
+      tools: ["Notion", "Confluence", "Microsoft Word", "Google Docs", "Lucidchart"]
+    },
+    {
+      phase: 3,
+      title: "MANAGEMENT",
+      skills: ["Project Management", "Product Development", "Business Development Management"],
+      tools: ["Jira", "Trello", "Asana", "Slack", "Microsoft Teams"]
+    },
+    {
+      phase: 4,
+      title: "DEVELOPMENT",
+      skills: ["Unity", "Python", "Web dev", "Java", "LLM Server"],
+      tools: ["Visual Studio Code", "Git/GitHub", "Docker", "AWS", "Postman", "Unity Editor"]
+    },
+    {
+      phase: 5,
+      title: "TEST & REVIEW",
+      skills: ["Quality Assurance Test"],
+      tools: ["Selenium", "Jest", "Cypress", "Jira", "TestRail"]
+    }
+  ];
 
-  // icons removed — nodes are label-only; lazy-loading not required
+  // DOM elements
+  const timeline = document.getElementById('timeline');
+  const progressDots = document.querySelectorAll('.progress-dot');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-  // utility: element center relative to SVG
-  function getElementCenterInSvg(el){
-    const r = el.getBoundingClientRect();
-    const svgRect = svg.getBoundingClientRect();
-    const x = (r.left + r.width/2) - svgRect.left;
-    const y = (r.top + r.height/2) - svgRect.top;
-    return {x, y};
+  let currentPhase = 1;
+  const totalPhases = timelineData.length;
+
+  // Generate timeline items
+  function generateTimeline() {
+    timeline.innerHTML = '';
+
+    timelineData.forEach(item => {
+      const timelineItem = document.createElement('div');
+      timelineItem.className = 'timeline-item';
+      timelineItem.dataset.phase = item.phase;
+
+      if (item.phase === currentPhase) {
+        timelineItem.classList.add('active');
+      }
+
+      timelineItem.innerHTML = `
+        <div class="timeline-bubble" tabindex="0" role="button" aria-label="View details for ${item.title}" aria-expanded="${item.phase === currentPhase}">
+          <div class="bubble-title">${item.title}</div>
+          <div class="bubble-content">
+            <div class="content-section">
+              <h4>SKILLS</h4>
+              <ul class="skills-list">
+                ${item.skills.map(skill => `<li>${skill}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="content-section">
+              <h4>TOOLS</h4>
+              <ul class="tools-list">
+                ${item.tools.map(tool => `<li>${tool}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+
+      timeline.appendChild(timelineItem);
+    });
+
+    // Add event listeners
+    document.querySelectorAll('.timeline-bubble').forEach(element => {
+      element.addEventListener('click', function() {
+        const phase = parseInt(this.closest('.timeline-item').dataset.phase);
+        setActivePhase(phase);
+      });
+
+      element.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const phase = parseInt(this.closest('.timeline-item').dataset.phase);
+          setActivePhase(phase);
+        }
+      });
+    });
   }
 
-  // throttle helper
-  function throttle(fn, wait){
-    let t = null; let lastArgs = null;
-    return function(...a){ lastArgs = a; if(!t){ t = setTimeout(()=>{ fn(...lastArgs); t = null; }, wait); } }
-  }
+  // Set active phase
+  function setActivePhase(phase) {
+    currentPhase = phase;
 
-  let hasAnimated = false;
-  function drawLines(animate = true){
-    if(!svg) return;
-    // ensure svg has same pixel size
-    const width = svg.clientWidth; const height = svg.clientHeight;
-    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
-    // clear old
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
-
-    const c = getElementCenterInSvg(center);
-    nodes.forEach(n => {
-      const p = getElementCenterInSvg(n);
-      const dx = (p.x - c.x) * 0.35;
-      const d = `M ${c.x} ${c.y} C ${c.x + dx} ${c.y} ${p.x - dx} ${p.y} ${p.x} ${p.y}`;
-      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('d', d);
-  // subtle stroke: semi-transparent and thinner
-  path.setAttribute('stroke', 'rgba(126,87,194,0.38)');
-  path.setAttribute('stroke-width', '2');
-      path.setAttribute('fill', 'none');
-      path.setAttribute('vector-effect', 'non-scaling-stroke');
-      path.style.filter = 'drop-shadow(0 6px 12px rgba(0,0,0,0.18))';
-      // initial dasharray based on path length
-      svg.appendChild(path);
-      // animate stroke only on first run if requested
-      if(animate && !hasAnimated){
-        const len = path.getTotalLength();
-        path.style.strokeDasharray = `${len}`;
-        path.style.strokeDashoffset = `${len}`;
-        // force reflow then add class to animate
-        requestAnimationFrame(()=>{ path.classList.add('drawn'); });
-        // when animation ends, convert to dashed discrete style
-        path.addEventListener('transitionend', function onEnd(e){
-          if(e.propertyName === 'stroke-dashoffset'){
-            path.classList.add('discrete');
-            path.removeEventListener('transitionend', onEnd);
-          }
-        });
+    // Update active state
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      if (parseInt(item.dataset.phase) === phase) {
+        item.classList.add('active');
+        item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'true');
       } else {
-        path.style.strokeDasharray = '';
-        path.style.strokeDashoffset = '0';
-        path.classList.add('drawn');
-        path.classList.add('discrete');
+        item.classList.remove('active');
+        item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'false');
       }
     });
-    if(animate) hasAnimated = true;
+
+    // Update progress dots
+    progressDots.forEach((dot, index) => {
+      if (index < phase) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+
+    // Update button states
+    prevBtn.disabled = phase === 1;
+    nextBtn.disabled = phase === totalPhases;
   }
 
-  const safeDraw = throttle(()=> drawLines(false), 80);
-  window.addEventListener('resize', safeDraw);
-  window.addEventListener('scroll', safeDraw);
-
-  // Node interactions: tooltips and panel toggles with ARIA updates
-  nodes.forEach(n => {
-    const id = n.dataset.id;
-    const panel = document.getElementById('panel-' + id);
-    // click toggles panel
-    n.addEventListener('click', (e)=>{
-      const isOpen = n.getAttribute('aria-expanded') === 'true';
-      // close all
-      nodes.forEach(x => x.setAttribute('aria-expanded','false'));
-      document.querySelectorAll('.skill-panel').forEach(p=> p.setAttribute('aria-hidden','true'));
-      if(!isOpen){
-        n.setAttribute('aria-expanded','true');
-        if(panel){ panel.setAttribute('aria-hidden','false'); panel.focus?.(); }
-      }
-      // redraw connectors to ensure visual alignment
-      drawLines(false);
-    });
-    // keyboard
-    n.addEventListener('keydown', (ev)=>{
-      if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); n.click(); }
-    });
-    // basic hover tooltip accessibility: show tooltip on focus
-    n.addEventListener('focus', ()=>{
-      const tip = n.querySelector('.node-tooltip'); if(tip) tip.setAttribute('aria-hidden','false');
-    });
-    n.addEventListener('blur', ()=>{
-      const tip = n.querySelector('.node-tooltip'); if(tip) tip.setAttribute('aria-hidden','true');
-    });
+  // Button event listeners
+  prevBtn.addEventListener('click', () => {
+    if (currentPhase > 1) {
+      setActivePhase(currentPhase - 1);
+    }
   });
 
-  // Draw lines and animate on initial load immediately
-  // (ensures animation is visible without scrolling into view)
-  drawLines(true);
+  nextBtn.addEventListener('click', () => {
+    if (currentPhase < totalPhases) {
+      setActivePhase(currentPhase + 1);
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft' && currentPhase > 1) {
+      setActivePhase(currentPhase - 1);
+    } else if (e.key === 'ArrowRight' && currentPhase < totalPhases) {
+      setActivePhase(currentPhase + 1);
+    }
+  });
+
+  // Initialize timeline
+  generateTimeline();
+  setActivePhase(1); // Ensure first phase is active
 });
