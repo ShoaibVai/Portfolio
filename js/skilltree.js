@@ -36,8 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DOM elements
   const timeline = document.getElementById('timeline');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
 
   let currentPhase = null; // Start with no active phase
   const totalPhases = timelineData.length;
@@ -80,30 +78,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add event listeners
     document.querySelectorAll('.timeline-bubble').forEach(element => {
-      element.addEventListener('click', function() {
+      // Click/Tap toggle functionality (works for both desktop and mobile)
+      element.addEventListener('click', function(e) {
+        e.preventDefault();
         const phase = parseInt(this.closest('.timeline-item').dataset.phase);
-        const isCurrentlyActive = this.closest('.timeline-item').classList.contains('active');
 
-        if (isCurrentlyActive) {
-          // If already active, collapse it by setting no active phase
+        // If this phase is currently active, deactivate it
+        if (currentPhase === phase) {
           setActivePhase(null);
         } else {
-          // If not active, make it active
+          // If not active, activate it
           setActivePhase(phase);
         }
       });
 
+      // Desktop hover (only for desktop, not mobile)
+      element.addEventListener('mouseenter', function() {
+        const item = this.closest('.timeline-item');
+        if (!item.classList.contains('active')) {
+          this.classList.add('hover-active');
+        }
+      });
+
+      element.addEventListener('mouseleave', function() {
+        const item = this.closest('.timeline-item');
+        if (!item.classList.contains('active')) {
+          this.classList.remove('hover-active');
+        }
+      });
+
+      // Keyboard navigation
       element.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           const phase = parseInt(this.closest('.timeline-item').dataset.phase);
-          const isCurrentlyActive = this.closest('.timeline-item').classList.contains('active');
 
-          if (isCurrentlyActive) {
-            // If already active, collapse it by setting no active phase
+          if (currentPhase === phase) {
             setActivePhase(null);
           } else {
-            // If not active, make it active
             setActivePhase(phase);
           }
         }
@@ -117,57 +129,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update active state
     document.querySelectorAll('.timeline-item').forEach(item => {
+      const bubble = item.querySelector('.timeline-bubble');
+
       if (phase === null) {
         // Collapse all phases
         item.classList.remove('active');
-        item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'false');
+        bubble.classList.remove('hover-active');
+        bubble.setAttribute('aria-expanded', 'false');
       } else if (parseInt(item.dataset.phase) === phase) {
         item.classList.add('active');
-        item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'true');
+        bubble.classList.remove('hover-active'); // Remove hover when active
+        bubble.setAttribute('aria-expanded', 'true');
       } else {
         item.classList.remove('active');
-        item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'false');
+        bubble.classList.remove('hover-active');
+        bubble.setAttribute('aria-expanded', 'false');
       }
     });
 
     // Update button states
-    prevBtn.disabled = phase === null || phase === 1;
-    nextBtn.disabled = phase === null || phase === totalPhases;
+    // prevBtn.disabled = phase === null || phase === 1;
+    // nextBtn.disabled = phase === null || phase === totalPhases;
   }
-
-  // Button event listeners
-  prevBtn.addEventListener('click', () => {
-    if (currentPhase === null) {
-      setActivePhase(totalPhases); // If collapsed, go to last phase
-    } else if (currentPhase > 1) {
-      setActivePhase(currentPhase - 1);
-    }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (currentPhase === null) {
-      setActivePhase(1); // If collapsed, go to first phase
-    } else if (currentPhase < totalPhases) {
-      setActivePhase(currentPhase + 1);
-    }
-  });
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      if (currentPhase === null) {
-        setActivePhase(totalPhases); // If collapsed, go to last phase
-      } else if (currentPhase > 1) {
-        setActivePhase(currentPhase - 1);
-      }
-    } else if (e.key === 'ArrowRight') {
-      if (currentPhase === null) {
-        setActivePhase(1); // If collapsed, go to first phase
-      } else if (currentPhase < totalPhases) {
-        setActivePhase(currentPhase + 1);
-      }
-    }
-  });
 
   // Initialize timeline
   generateTimeline();
