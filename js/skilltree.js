@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DOM elements
   const timeline = document.getElementById('timeline');
-  const progressDots = document.querySelectorAll('.progress-dot');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
@@ -128,17 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         item.classList.remove('active');
         item.querySelector('.timeline-bubble').setAttribute('aria-expanded', 'false');
-      }
-    });
-
-    // Update progress dots
-    progressDots.forEach((dot, index) => {
-      if (phase === null) {
-        dot.classList.remove('active');
-      } else if (index < phase) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
       }
     });
 

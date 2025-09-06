@@ -66,28 +66,6 @@
   100% { background-position: 0 6px; }
 }
 
-.progress-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-  position: relative;
-  z-index: 2;
-}
-
-.progress-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #444;
-  margin: 0 8px;
-  transition: all 0.3s ease;
-}
-
-.progress-dot.active {
-  background-color: var(--primary-color);
-  box-shadow: 0 0 10px var(--primary-color);
-}
-
 .timeline {
   position: relative;
   margin: 0 auto;
