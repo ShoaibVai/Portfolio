@@ -451,6 +451,17 @@
     .form-group textarea {
         padding: 8px;
     }
+    
+    /* Project links adjustments for mobile */
+    .project-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .project-card .game-button {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 /* Small Height Screens */
