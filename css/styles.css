@@ -1678,27 +1678,79 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     margin-top: 1rem;
+    padding: 0 2rem;
 }
 
 .role-item {
     font-family: var(--game-font);
     font-size: 1.5rem;
-    color: var(--secondary-color);
-    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+    color: var(--text-color);
     padding: 0.5rem 1rem;
-    border-radius: 8px;
     background: transparent;
-    border: 2px solid var(--border-color);
-    transform-style: preserve-3d;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    border: none;
+    position: relative;
+    transition: all 0.3s ease;
     cursor: pointer;
+    font-weight: normal;
+}
+
+.role-item::before,
+.role-item::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    font-family: var(--game-font);
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.role-item::before {
+    content: '<';
+    left: -25px;
+}
+
+.role-item::after {
+    content: '>';
+    right: -25px;
 }
 
 .role-item:hover {
-    color: var(--accent-color);
-    box-shadow: 0 5px 15px var(--shadow-color);
+    color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+.role-item:hover::before,
+.role-item:hover::after {
+    opacity: 1;
+    animation: bracketGlow 0.3s ease-in-out;
+}
+
+.role-item:hover::before {
+    left: -20px;
+}
+
+.role-item:hover::after {
+    right: -20px;
+}
+
+@keyframes bracketGlow {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+    }
+    50% {
+        transform: translateY(-50%) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
 }
 
 /* Start CTA in hero */
