@@ -1,0 +1,35 @@
+{
+    "name": "Shoaib Ibna Omar - Game Developer & AR/VR Engineer",
+    "short_name": "Shoaib Portfolio",
+    "description": "Expert Game Developer & AR/VR Engineer portfolio showcasing Unity projects, AR/VR applications, and innovative gaming solutions",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4CAF50",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "icons": [
+        {
+            "src": "assets/images/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "assets/images/logo.png", 
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["portfolio", "games", "developer", "technology"],
+    "screenshots": [
+        {
+            "src": "assets/images/avatar.png",
+            "sizes": "420x420",
+            "type": "image/png",
+            "form_factor": "wide"
+        }
+    ]
+}

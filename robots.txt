@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+
+# Sitemap location
+Sitemap: https://shoaibibnaomar.github.io/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Disallow non-essential files
+Disallow: /*.pdf$
+Disallow: /README.md
+Disallow: /LICENSE
+Disallow: /PROJECTS-DOCS.md
+
+# Allow essential pages
+Allow: /index.html
+Allow: /projects.html
+Allow: /achievements.html
+Allow: /blogs.html
