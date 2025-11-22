@@ -98,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggleSoundButton) {
         toggleSoundButton.addEventListener('click', toggleSound);
     }
+
+    // Text size toggle (accessibility)
     
     // Navigation scroll effect
     setupNavigationScrollEffect();
@@ -121,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize avatar audio visualizer
     initAvatarVisualizer();
 });
+
+// text-size toggle removed - font baseline is responsive via root font-size clamp
 
 // Preload assets
 function preloadAssets() {
@@ -295,8 +299,10 @@ function updateThemeIcon() {
     if (!icon) return;
     if (currentTheme === 'light') {
         icon.className = 'fas fa-sun';
+        toggleThemeButton.setAttribute('aria-pressed', 'false');
     } else {
         icon.className = 'fas fa-moon';
+        toggleThemeButton.setAttribute('aria-pressed', 'true');
     }
 }
 
@@ -369,8 +375,10 @@ function updateSoundIcon() {
     if (!icon) return;
     if (soundEnabled) {
         icon.className = 'fas fa-volume-up';
+        toggleSoundButton.setAttribute('aria-pressed', 'true');
     } else {
         icon.className = 'fas fa-volume-mute';
+        toggleSoundButton.setAttribute('aria-pressed', 'false');
     }
 }
 

@@ -49,7 +49,7 @@
     }
 
     .nav-links {
-        flex-direction: column;
+        font-size: 1rem; /* ensure at least 12px baseline */
         gap: 0;
         padding: 2rem 0;
         height: 100%;
@@ -164,11 +164,11 @@
     }
 
     .nav-links {
-        gap: 2rem;
+        font-size: 1rem; /* slightly larger for readability */
     }
 
     .nav-link {
-        font-size: 0.9rem;
+        font-size: 1rem;
         padding: 10px 20px;
     }
 
@@ -202,7 +202,7 @@
     }
 
     .nav-links {
-        flex-direction: row;
+        font-size: 1rem;
         gap: 1.5rem;
         padding: 0;
         height: auto;
@@ -218,7 +218,7 @@
     }
 
     .nav-link {
-        font-size: 0.8rem;
+        font-size: 1rem;
         padding: 8px 16px;
         border: none;
         border-radius: var(--border-radius);
@@ -337,7 +337,7 @@
     }
 
     .nav-link {
-        font-size: 0.9rem;
+        font-size: 1rem;
         padding: 10px 20px;
     }
 
@@ -388,8 +388,8 @@
 /* Mobile Navigation Adjustments */
 @media (max-width: 767px) {
     #audio-controls, #theme-toggle {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
     }
     
     #audio-controls {
@@ -403,13 +403,13 @@
     }
     
     .menu-button {
-        font-size: 1rem;
+        font-size: 1.05rem;
         padding: 12px 24px;
         width: 240px;
     }
     
     .back-button {
-        font-size: 0.7rem;
+        font-size: 1rem;
         padding: 6px 12px;
     }
     
@@ -581,12 +581,12 @@
     #start-button {
         margin-top: 10px;
         margin-bottom: 10px;
-        font-size: 0.8rem;
+    font-size: 1rem;
         padding: 8px 16px;
     }
     
     .blink-text {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 }
 

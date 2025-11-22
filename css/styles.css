@@ -71,9 +71,22 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: clamp(12px, 2.6vw, 18px); /* Scale between 12px and 18px for mobile-friendly text */
     scroll-behavior: smooth;
 }
+
+/* Base typography improvements for readability */
+body {
+    font-family: var(--base-font);
+    font-size: 1rem; /* 16px */
+    line-height: 1.6;
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Text Size Toggle (Accessibility) */
+/* text-size-toggle removed -- keep default scaling via html root clamp */
 
 /* Navigation Bar */
 #main-navigation {
@@ -147,7 +160,7 @@ html {
 
 .nav-link {
     font-family: var(--pixel-font);
-    font-size: 0.8rem;
+    font-size: 1rem; /* Base nav link size, aligns with root clamp min 12px */
     color: var(--text-color);
     text-decoration: none;
     padding: 8px 16px;
@@ -202,8 +215,8 @@ html {
     display: none;
     flex-direction: column;
     justify-content: space-around;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px; /* Larger touch target */
     background: transparent;
     border: none;
     cursor: pointer;
@@ -221,6 +234,40 @@ html {
     border-radius: 2px;
     transition: all var(--transition-speed) ease;
     transform-origin: center;
+}
+
+/* Make canvas responsive and ensure avatars scale properly */
+.avatar-visualizer-wrapper,
+.avatar-visualizer-wrapper canvas,
+.intro-avatar {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Buttons, inputs and textareas: ensure accessible font size and target size */
+button,
+.game-button,
+input,
+textarea,
+.menu-button {
+    font-size: 1rem; /* 16px */
+    min-height: 44px; /* Touch target recommendation */
+    padding: 10px 14px;
+}
+
+/* Small text fixes: ensure minimum font-size is accessible */
+    .back-button,
+    .small-muted,
+    small,
+    .form-help,
+    .menu-button.small {
+    font-size: 1rem; /* ~12px baseline for accessibility */
+}
+
+/* Focus styles that respect accessible contrast */
+:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
 }
 
 .nav-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
@@ -379,6 +426,39 @@ img {
     margin-top: 1rem;
 }
 
+/* Stylized role display (typed) */
+#typed-roles {
+    font-family: var(--game-font);
+    font-size: clamp(1rem, 3.2vw, 1.6rem);
+    color: var(--accent-color);
+    font-weight: 700;
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(var(--accent-color-rgb), 0.15), rgba(var(--primary-color-rgb), 0.08));
+    border: 1px solid rgba(var(--accent-color-rgb), 0.18);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+#typed-roles:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+#typed-roles::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
 .side-note {
     position: absolute;
     top: 50%;
@@ -509,6 +589,9 @@ img {
     top: 85px;
     left: 20px;
 }
+
+/* Text size toggle (near theme) */
+/* text-size-toggle removed */
 
 #toggle-sound, #toggle-theme {
     width: 40px;
@@ -720,13 +803,13 @@ img {
 }
 
 .game-button.small {
-    font-size: 0.7rem;
+    font-size: 1rem; /* Larger for readability and touch */
     padding: 8px 16px;
 }
 
 .back-button {
     font-family: var(--pixel-font);
-    font-size: 0.8rem;
+    font-size: 1rem; /* Increased back-button size */
     padding: 8px 16px;
     background-color: var(--secondary-color);
     color: white;
@@ -875,7 +958,7 @@ img {
 
 .stat-label {
     font-family: var(--pixel-font);
-    font-size: 0.7rem;
+    font-size: 1rem; /* increase stat label size */
     color: var(--text-color);
     opacity: 0.7;
 }
@@ -975,7 +1058,7 @@ img {
 
 .skill-level {
     font-family: var(--game-font);
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-align: right;
     display: block;
 }
@@ -1084,7 +1167,7 @@ img {
 
 .tech-badge {
     font-family: var(--pixel-font);
-    font-size: 0.6rem;
+    font-size: 1rem;
     padding: 5px 10px;
     background-color: var(--primary-color);
     color: white;
@@ -1172,7 +1255,7 @@ img {
 }
 
 .achievement-info p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin-bottom: 0;
 }
 
@@ -1274,7 +1357,7 @@ img {
 
 .timeline-date {
     font-family: var(--pixel-font);
-    font-size: 0.8rem;
+    font-size: 1rem; /* increase timeline date size */
     color: var(--accent-color);
     margin-bottom: 10px;
     display: inline-block;
@@ -1530,7 +1613,7 @@ img {
 .form-group label {
     display: block;
     font-family: var(--pixel-font);
-    font-size: 0.8rem;
+    font-size: 1rem; /* increase form label size */
     margin-bottom: 5px;
 }
 
@@ -1557,13 +1640,13 @@ footer {
     text-align: center;
     padding: 20px;
     margin-top: 40px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     opacity: 0.8;
 }
 
 .pixel-text {
     font-family: var(--pixel-font);
-    font-size: 0.7rem;
+    font-size: 1rem; /* larger for better readability */
     margin-top: 10px;
 }
 

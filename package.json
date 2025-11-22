@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Shoaib Ibna Omar Portfolio - UI/UX improvements and build scripts",
+  "scripts": {
+    "build": "node scripts/minify.js"
+  },
+  "devDependencies": {
+    "terser": "^5.23.6"
+  }
+}

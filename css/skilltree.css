@@ -15,7 +15,7 @@
 /* Timeline subtitle styling */
 .timeline-subtitle {
   font-family: var(--pixel-font);
-  font-size: 10px;
+  font-size: 12px; /* increased for readability */
   color: var(--secondary-color);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -164,7 +164,7 @@
 
 .content-section h4 {
   font-family: var(--pixel-font);
-  font-size: 10px;
+  font-size: 12px; /* increased for readability */
   color: var(--secondary-color);
   margin-bottom: 8px;
   text-transform: uppercase;
