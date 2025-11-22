@@ -5,7 +5,8 @@
     /* Color Palette - Light Theme */
     --primary-color: #5d34af;
     --secondary-color: #3e8948;
-    --accent-color: #ffcc00;
+    /* Use primary color as the accent color on light theme for improved contrast */
+    --accent-color: var(--primary-color);
     --background-color: #f0f0f0;
     --card-background: #ffffff;
     --text-color: #333333;
@@ -15,7 +16,7 @@
     /* RGB Color Values for transparency */
     --primary-color-rgb: 93, 52, 175;
     --secondary-color-rgb: 62, 137, 72;
-    --accent-color-rgb: 255, 204, 0;
+    --accent-color-rgb: var(--primary-color-rgb);
     --card-background-rgb: 255, 255, 255;
     --text-color-rgb: 51, 51, 51;
     --border-color-rgb: 204, 204, 204;
@@ -424,6 +425,39 @@ img {
     position: relative;
     display: inline-block;
     margin-top: 1rem;
+}
+
+/* Stylized section subtitles used across the site */
+.section-subtitle {
+    font-family: var(--pixel-font);
+    font-size: clamp(0.9rem, 1.75vw, 1.15rem); /* responsive text sizing */
+    color: var(--secondary-color);
+    display: inline-block; /* allow decorative pseudo element positioning */
+    letter-spacing: 1px;
+    text-transform: none; /* keep natural case but letter spaced */
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(var(--card-background-rgb), 0.06), rgba(var(--card-background-rgb), 0.03));
+    border: 1px solid rgba(var(--border-color-rgb), 0.06);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.section-subtitle::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+    box-shadow: 0 2px 6px rgba(var(--primary-color-rgb), 0.12);
+}
+
+.section-subtitle:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
 
 /* Stylized role display (typed) */
