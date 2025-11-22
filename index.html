@@ -39,10 +39,10 @@
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="apple-touch-icon" href="assets/images/logo.png">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/skilltree.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/styles.min.css">
+    <link rel="stylesheet" href="css/skilltree.min.css">
+    <link rel="stylesheet" href="css/animations.min.css">
+    <link rel="stylesheet" href="css/responsive.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Performance optimizations -->
@@ -52,7 +52,7 @@
     
     <!-- Preload critical resources -->
     <link rel="preload" href="css/styles.css" as="style">
-    <link rel="preload" href="js/main.js" as="script">
+    <link rel="preload" href="js/main.min.js" as="script">
     <link rel="preload" href="assets/images/avatar.png" as="image" importance="high">
     
     <!-- Preload sounds -->
@@ -105,6 +105,7 @@
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Background Music -->
     <audio id="background-music" loop preload="auto" playsinline autoplay muted>
         <source src="assets/sounds/Pixelated Dreams.mp3" type="audio/mpeg">
@@ -138,7 +139,7 @@
     <nav id="main-navigation" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo">
+                    <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo" width="40" height="40" loading="eager" decoding="async">
             </div>
             
             <!-- Desktop Navigation -->
@@ -164,11 +165,12 @@
 
     
     <!-- Intro Header -->
-    <header id="intro" class="main-header">
+    <main id="main-content">
+    <header id="intro" class="main-header" data-aos="zoom-in" data-aos-duration="900" data-aos-easing="ease-in-out-cubic">
         <div class="section-container">
             <div class="avatar-visualizer-wrapper">
                 <canvas id="avatar-visualizer" width="420" height="420" aria-hidden="true"></canvas>
-                <img src="assets/images/avatar.png" alt="Pixel avatar of Shoaib Ibna Omar" class="intro-avatar">
+                <img src="assets/images/avatar.png" alt="Pixel avatar of Shoaib Ibna Omar" class="intro-avatar" width="420" height="420" decoding="async">
             </div>
             <h1>Shoaib Ibna Omar</h1>
             <div class="intro-roles-wrapper">
@@ -197,7 +199,7 @@
     </header>
 
     <!-- Skills Section -->
-    <section id="skills" class="game-section">
+    <section id="skills" class="game-section" data-aos="fade-up" data-aos-duration="800">
         <div class="section-container">
             <div class="section-header">
                 <h2>Skills <span class="timeline-form-text">[Project Timeline Form]</span></h2>
@@ -216,7 +218,7 @@
     
 
     <!-- Experience Section -->
-    <section id="experience" class="game-section">
+    <section id="experience" class="game-section" data-aos="fade-up" data-aos-duration="800">
         <div class="section-container">
             <div class="section-header">
                 <h2>Adventure Log</h2>
@@ -225,7 +227,7 @@
                 <!-- IT & Management Column -->
                 <div class="experience-column">
                     <h3 class="experience-subtitle">IT &amp; Management</h3>
-                    <div class="experience-card">
+                    <div class="experience-card" data-aos="fade-up" data-aos-duration="700">
                         <div class="experience-date">2023 – 2025</div>
                         <h4>President &amp; Game Developer</h4>
                         <h5>AR/VR &amp; Game Development Lab, DIU</h5>
@@ -237,7 +239,7 @@
                             <li><strong>Represented</strong> the lab in a government innovation workshop</li>
                         </ul>
                     </div>
-                    <div class="experience-card">
+                    <div class="experience-card" data-aos="fade-up" data-aos-duration="700">
                         <div class="experience-date">Jan 2025 – Jul 2025</div>
                         <h4>Game Developer Intern (Remote)</h4>
                         <h5>Aamira Software Solution (Indiana, USA)</h5>
@@ -250,7 +252,7 @@
 
                 <!-- Bridge / Hybrid Role -->
                 <div class="experience-bridge">
-                    <div class="experience-card bridge-card">
+                    <div class="experience-card bridge-card" data-aos="zoom-in" data-aos-duration="700">
                         <div class="experience-date">Jan 2025 – Present</div>
                         <h4>Game Developer &amp; Business Development Manager</h4>
                         <h5>Growbrandly, Dhaka, Bangladesh</h5>
@@ -266,7 +268,7 @@
                 <!-- Business & Marketing Column -->
                 <div class="experience-column">
                     <h3 class="experience-subtitle">Business &amp; Marketing</h3>
-                    <div class="experience-card">
+                    <div class="experience-card" data-aos="fade-up" data-aos-duration="700">
                         <div class="experience-date">Jun 2023 – Present</div>
                         <h4>Social Media Manager</h4>
                         <h5>Sister’s Group Limited</h5>
@@ -304,7 +306,7 @@
                 <h2>Contact Quest</h2>
             </div>
             <div class="contact-container">
-                <div class="dialogue-box">
+                <div class="dialogue-box" data-aos="fade-right" data-aos-duration="700">
                     <div class="dialogue-header">
                         <div class="dialogue-avatar"></div>
                         <h3>Shoaib Ibna Omar</h3>
@@ -328,20 +330,20 @@
                     </div>
                 </div>
                 
-                <div class="contact-form">
+                <div class="contact-form" data-aos="fade-left" data-aos-duration="700">
                     <h3>Send a Direct Message</h3>
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" required aria-required="true">
                         </div>
                         <div class="form-group">
                             <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" required aria-required="true">
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="4" required></textarea>
+                            <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
                         </div>
                         <button type="submit" class="game-button">Send Message</button>
                     </form>
@@ -350,6 +352,7 @@
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer>
     <p>&copy; 2025 Shoaib Ibna Omar | Game Developer & AR/VR Engineer</p>

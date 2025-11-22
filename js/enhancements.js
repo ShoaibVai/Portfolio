@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,
-            easing: 'ease-out-cubic',
+            easing: 'ease-in-out-cubic',
             once: true,
             offset: 50,
-            delay: 100
+            delay: 100,
+            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
         });
     }
 
@@ -31,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize Vanilla Tilt for cards
-    if (typeof VanillaTilt !== 'undefined') {
+    // Initialize Vanilla Tilt for cards (only on non-touch / large screens)
+    if (typeof VanillaTilt !== 'undefined' && !window.matchMedia('(pointer: coarse)').matches && window.innerWidth > 768) {
         const cards = document.querySelectorAll('.experience-card, .project-card, .achievement-card, .blog-card');
         VanillaTilt.init(cards, {
             max: 5,

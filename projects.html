@@ -28,10 +28,11 @@
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="apple-touch-icon" href="assets/images/logo.png">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/skilltree.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/styles.min.css">
+    <link rel="stylesheet" href="css/skilltree.min.css">
+    <link rel="stylesheet" href="css/animations.min.css">
+    <link rel="stylesheet" href="css/responsive.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Preload sounds -->
     <link rel="preload" href="assets/sounds/button-click.mp3" as="audio">
     <link rel="preload" href="assets/sounds/hover.mp3" as="audio">
@@ -41,6 +42,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Background Music -->
     <audio id="background-music" loop preload="auto" playsinline autoplay muted>
         <source src="assets/sounds/Pixelated Dreams.mp3" type="audio/mpeg">
@@ -74,7 +76,7 @@
     <nav id="main-navigation" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo">
+                <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo" width="40" height="40" loading="eager" decoding="async">
             </div>
             
             <!-- Desktop Navigation -->
@@ -98,6 +100,7 @@
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Projects Section -->
     <section id="projects" class="game-section">
         <div class="section-container">
@@ -107,8 +110,10 @@
 
             <div class="projects-grid">
                 <!-- CustomerCareAI -->
-                <article class="project-card" data-animation="hidden">
-                    <div class="project-image" style="background-image: url('assets/images/logo.png');"></div>
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
+                        <div class="project-image">
+                            <img src="assets/images/logo.png" alt="CustomerCareAI project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                        </div>
                     <div class="project-info">
                         <div class="project-type">AI | Web App</div>
                         <h3>CustomerCareAI</h3>
@@ -126,8 +131,10 @@
                 </article>
 
                 <!-- server_batch_downloader -->
-                <article class="project-card" data-animation="hidden">
-                    <div class="project-image" style="background-image: url('assets/images/avatar.png');"></div>
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
+                    <div class="project-image">
+                        <img src="assets/images/avatar.png" alt="server_batch_downloader project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                    </div>
                     <div class="project-info">
                         <div class="project-type">GUI | Python</div>
                         <h3>server_batch_downloader</h3>
@@ -145,8 +152,10 @@
                 </article>
 
                 <!-- AR-Measurement -->
-                <article class="project-card" data-animation="hidden">
-                    <div class="project-image" style="background-image: url('assets/images/avatar.png');"></div>
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
+                    <div class="project-image">
+                        <img src="assets/images/avatar.png" alt="AR-Measurement project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                    </div>
                     <div class="project-info">
                         <div class="project-type">AR | Unity</div>
                         <h3>AR-Measurement</h3>
@@ -164,9 +173,9 @@
                 </article>
 
                 <!-- AR_outdoor_Navi -->
-                <article class="project-card" data-animation="hidden">
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
                     <div class="project-image">
-                        <video autoplay muted loop playsinline poster="assets/images/logo.png">
+                        <video autoplay muted loop playsinline poster="assets/images/logo.png" width="600" height="400">
                             <source src="assets/videos/AR_Navigation.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -188,9 +197,9 @@
                 </article>
 
                 <!-- AR_RPG_Multiplayer -->
-                <article class="project-card" data-animation="hidden">
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
                     <div class="project-image">
-                        <video autoplay muted loop playsinline poster="assets/images/avatar-small.png">
+                        <video autoplay muted loop playsinline poster="assets/images/avatar-small.png" width="600" height="400">
                             <source src="assets/videos/AR_RPG.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -212,8 +221,10 @@
                 </article>
 
                 <!-- Claw_Machine -->
-                <article class="project-card" data-animation="hidden">
-                    <div class="project-image" style="background-image: url('assets/images/logo.png');"></div>
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
+                    <div class="project-image">
+                        <img src="assets/images/logo.png" alt="Claw Machine project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                    </div>
                     <div class="project-info">
                         <div class="project-type">Game | WebGL</div>
                         <h3>Claw_Machine</h3>
@@ -231,8 +242,10 @@
                 </article>
 
                 <!-- CoWork360—Multiplayer XR -->
-                <article class="project-card" data-animation="hidden">
-                    <div class="project-image" style="background-image: url('assets/images/avatar.png');"></div>
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
+                    <div class="project-image">
+                        <img src="assets/images/avatar.png" alt="CoWork360 Multiplayer XR project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                    </div>
                     <div class="project-info">
                         <div class="project-type">XR | Multiplayer</div>
                         <h3>CoWork360—Multiplayer XR</h3>
@@ -250,8 +263,10 @@
                 </article>
 
                 <!-- CrickeTgame -->
-                <article class="project-card" data-animation="hidden">
-                    <div class="project-image" style="background-image: url('assets/images/logo.png');"></div>
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
+                    <div class="project-image">
+                        <img src="assets/images/logo.png" alt="CrickeTgame project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                    </div>
                     <div class="project-info">
                         <div class="project-type">CLI Game | Python</div>
                         <h3>CrickeTgame</h3>
@@ -268,8 +283,10 @@
                 </article>
 
                 <!-- RkPprScisor -->
-                <article class="project-card" data-animation="hidden">
-                    <div class="project-image" style="background-image: url('assets/images/avatar-small.png');"></div>
+                <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
+                    <div class="project-image">
+                        <img src="assets/images/avatar-small.png" alt="RkPprScisor project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                    </div>
                     <div class="project-info">
                         <div class="project-type">CLI Game | Python</div>
                         <h3>RkPprScisor</h3>
@@ -288,6 +305,7 @@
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 Shoaib Ibna Omar | Game Developer & AR/VR Engineer</p>
@@ -310,10 +328,15 @@
 
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/animations.js" defer></script>
-    <script src="js/skilltree.js" defer></script>
-    <script src="js/sounds.js" defer></script>
-    <script src="js/pingpong.js" defer></script>
+    <!-- AOS animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js" defer></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js" defer></script>
+    <script src="js/enhancements.min.js" defer></script>
+    <script src="js/main.min.js" defer></script>
+    <script src="js/animations.min.js" defer></script>
+    <script src="js/skilltree.min.js" defer></script>
+    <script src="js/sounds.min.js" defer></script>
+    <script src="js/pingpong.min.js" defer></script>
 </body>
 </html>

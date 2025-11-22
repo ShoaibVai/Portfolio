@@ -71,6 +71,29 @@
     padding: 0;
 }
 
+/* Skip link to improve keyboard navigation */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    background: var(--card-background);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 2000;
+}
+
 html {
     font-size: clamp(12px, 2.6vw, 18px); /* Scale between 12px and 18px for mobile-friendly text */
     scroll-behavior: smooth;
