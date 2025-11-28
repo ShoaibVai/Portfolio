@@ -1,5 +1,27 @@
 /* Responsive Styles for Game-themed Portfolio */
 
+/* Responsive Typography Scale by Device */
+@media (max-width: 480px) {
+    :root {
+        /* Mobile: smallest screens get 18px base body text */
+        --body-font-size: var(--body-font-size-mobile);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1024px) {
+    :root {
+        /* Tablet: medium screens get 19px base body text */
+        --body-font-size: var(--body-font-size-tablet);
+    }
+}
+
+@media (min-width: 1025px) {
+    :root {
+        /* Desktop: large screens get 20px base body text */
+        --body-font-size: var(--body-font-size);
+    }
+}
+
 /* Mobile Navigation Styles */
 @media (max-width: 768px) {
     .nav-toggle {

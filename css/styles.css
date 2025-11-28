@@ -42,6 +42,12 @@
 
     /* Transitions */
     --transition-speed: 0.3s;
+
+    /* Typography Scale - Responsive Body Text */
+    --body-font-size: 1.25rem; /* Desktop base: ~20px */
+    --body-font-size-tablet: 1.1875rem; /* Tablet: ~19px */
+    --body-font-size-mobile: 1.125rem; /* Mobile: ~18px */
+    --small-text-size: 0.9rem;
 }
 
 /* Dark Theme Variables */
@@ -436,11 +442,11 @@ h3 {
 
 p {
     margin-bottom: 1rem;
+    font-size: var(--body-font-size);
 }
 
-/* Increase body text size (excluding headings) for better readability on most screens
-   This targets common content elements while leaving h1-h6 untouched. */
-p,
+/* Variable-driven body text size (excluding headings) for better readability
+   Uses CSS custom properties for easy maintenance and responsive adjustments */
 .project-description,
 .achievement-info p,
 .experience-card p,
@@ -462,14 +468,14 @@ small,
 button,
 input,
 textarea {
-    font-size: 1.125rem; /* ~18px (relative to root) */
+    font-size: var(--body-font-size);
 }
 
 /* Keep very small helper/note text slightly smaller but readable */
 .experience-note,
 .experience-date,
 .experience-card h5 {
-    font-size: 0.9rem;
+    font-size: var(--small-text-size);
 }
 
 a {
