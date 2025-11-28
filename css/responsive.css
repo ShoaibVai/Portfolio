@@ -18,7 +18,7 @@
         opacity: 0;
         visibility: hidden;
         transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
-        z-index: -1;
+        z-index: -2;
     }
 
     .nav-menu.active::before {
@@ -29,23 +29,55 @@
     .nav-menu {
         position: fixed;
         top: 70px;
-        left: 0;
+        right: 0;
+        left: auto;
         width: 80%;
-        max-width: 300px;
+        max-width: 320px;
         height: calc(100vh - 70px);
-        background-color: rgba(var(--card-background-rgb, 255, 255, 255), 0.98);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        transform: translateX(-100%);
-        transition: transform var(--transition-speed) ease;
+        background: transparent;
+        border-left: 1px solid rgba(255, 255, 255, 0.18);
+        border-right: 1px solid rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        transform: translate3d(120%, 0, 0);
+        transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border var(--transition-speed) ease;
         z-index: 999;
+        isolation: isolate;
         overflow-y: auto;
-        border-right: 2px solid var(--border-color);
-        box-shadow: 4px 0 20px var(--shadow-color);
+        box-shadow: -22px 0 55px rgba(5, 9, 22, 0.45);
+        border-radius: 18px 0 0 18px;
+        padding-bottom: 2rem;
+    }
+
+    body[data-theme="dark"] .nav-menu {
+        background:
+            linear-gradient(130deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0)),
+            linear-gradient(160deg, rgba(var(--card-background-rgb), 0.84), rgba(var(--background-color-rgb), 0.45));
+    }
+
+    body:not([data-theme="dark"]) .nav-menu {
+        background:
+            linear-gradient(130deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05)),
+            linear-gradient(160deg, rgba(var(--card-background-rgb), 0.98), rgba(var(--card-background-rgb), 0.6));
     }
 
     .nav-menu.active {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
+        box-shadow: -26px 0 60px rgba(5, 9, 22, 0.5);
+    }
+
+    .nav-menu::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(115deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0)),
+            radial-gradient(circle at 15% 20%, rgba(var(--accent-color-rgb), 0.22), transparent 60%),
+            radial-gradient(circle at 85% 0%, rgba(var(--primary-color-rgb), 0.18), transparent 55%);
+        opacity: 0.65;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        z-index: -1;
     }
 
     .nav-links {
@@ -53,7 +85,9 @@
         gap: 0;
         padding: 2rem 0;
         height: 100%;
+        flex-direction: column;
         justify-content: flex-start;
+        align-items: stretch;
     }
 
     .nav-link {
@@ -77,6 +111,7 @@
     .nav-link.active::before {
         width: 4px;
         height: 100%;
+        background-color: rgba(var(--accent-color-rgb, 255, 221, 0), 0.7);
     }
 
     .nav-container {
