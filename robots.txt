@@ -5,7 +5,7 @@ Allow: /css/
 Allow: /js/
 
 # Sitemap location
-Sitemap: https://shoaibibnaomar.github.io/sitemap.xml
+Sitemap: https://shoaibibnaomar.netlify.app/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
