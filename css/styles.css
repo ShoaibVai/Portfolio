@@ -438,6 +438,40 @@ p {
     margin-bottom: 1rem;
 }
 
+/* Increase body text size (excluding headings) for better readability on most screens
+   This targets common content elements while leaving h1-h6 untouched. */
+p,
+.project-description,
+.achievement-info p,
+.experience-card p,
+.experience-points li,
+.skill-lead,
+.skill-name,
+.stat-label,
+.stat-value,
+.side-note-text,
+.dialogue-text,
+.project-type,
+.start-hint,
+.pixel-text,
+.form-group label,
+footer,
+small,
+.menu-button,
+.game-button,
+button,
+input,
+textarea {
+    font-size: 1.125rem; /* ~18px (relative to root) */
+}
+
+/* Keep very small helper/note text slightly smaller but readable */
+.experience-note,
+.experience-date,
+.experience-card h5 {
+    font-size: 0.9rem;
+}
+
 a {
     color: var(--primary-color);
     text-decoration: none;
