@@ -13,7 +13,7 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Shoaib Ibna Omar | Game Developer & AR/VR Engineer">
     <meta property="og:description" content="Expert Game Developer & AR/VR Engineer with 3+ years experience in Unity, C#, ARCore. View my portfolio of innovative games and AR/VR applications.">
-    <meta property="og:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar.png">
+    <meta property="og:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar1.png">
     <meta property="og:image:alt" content="Pixel avatar of Shoaib Ibna Omar">
     <meta property="og:url" content="https://shoaibibnaomar.netlify.app/">
     <meta property="og:type" content="website">
@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Shoaib Ibna Omar | Game Developer & AR/VR Engineer">
     <meta name="twitter:description" content="Expert Game Developer & AR/VR Engineer with 3+ years experience in Unity, C#, ARCore. View my portfolio of innovative games and AR/VR applications.">
-    <meta name="twitter:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar.png">
+    <meta name="twitter:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar1.png">
     <meta name="twitter:image:alt" content="Pixel avatar of Shoaib Ibna Omar">
     <meta name="twitter:url" content="https://shoaibibnaomar.netlify.app/">
     <meta name="twitter:site" content="@ShoaibVai">
@@ -34,6 +34,8 @@
     <meta name="theme-color" content="#4CAF50">
     <meta name="msapplication-TileColor" content="#4CAF50">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- The mobile-web-app-capable meta is used by some platforms -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Shoaib Portfolio">
     
@@ -67,13 +69,9 @@
     <!-- Preload critical resources (minified) -->
     <link rel="preload" href="css/styles.min.css" as="style">
     <link rel="preload" href="js/main.min.js" as="script">
-    <link rel="preload" href="assets/images/avatar.png" as="image" importance="high">
+    <link rel="preload" href="assets/images/avatar1.png" as="image">
     
-    <!-- Preload sounds -->
-    <link rel="preload" href="assets/sounds/button-click.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/hover.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/start.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/Pixelated Dreams.mp3" as="audio">
+    <!-- Preload sounds were removed to avoid unsupported preload 'as' warnings. Audio loads via the <audio> element. -->
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -86,7 +84,7 @@
         "jobTitle": "Game Developer & AR/VR Engineer",
         "description": "Expert Game Developer & AR/VR Engineer with 3+ years experience in Unity, C#, ARCore, and Mapbox development.",
         "url": "https://shoaibibnaomar.netlify.app/",
-        "image": "https://shoaibibnaomar.netlify.app/assets/images/avatar.png",
+        "image": "https://shoaibibnaomar.netlify.app/assets/images/avatar1.png",
         "email": "shoaibibnaomar@gmail.com",
         "telephone": "+8801777144103",
         "address": {
@@ -197,7 +195,11 @@
         <div class="section-container">
             <div class="avatar-visualizer-wrapper">
                 <canvas id="avatar-visualizer" width="420" height="420" aria-hidden="true"></canvas>
-                <img src="assets/images/avatar.png" alt="Pixel avatar of Shoaib Ibna Omar" class="intro-avatar" width="420" height="420" decoding="async">
+                <picture>
+                    <source media="(max-width: 480px)" srcset="assets/images/avatar-small.png">
+                    <source media="(max-width: 1024px)" srcset="assets/images/avatar1.png">
+                    <img src="assets/images/avatar1.png" alt="Pixel avatar of Shoaib Ibna Omar" class="intro-avatar" width="420" height="420" decoding="async">
+                </picture>
             </div>
             <h1>Shoaib Ibna Omar</h1>
             <div class="intro-roles-wrapper">
@@ -390,15 +392,7 @@
     </footer>
 
     <!-- Audio Elements -->
-    <audio id="click-sound" preload="auto">
-        <source src="assets/sounds/button-click.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="hover-sound" preload="auto">
-        <source src="assets/sounds/hover.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="start-sound" preload="auto">
-        <source src="assets/sounds/start.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Optional click/hover/start sounds removed (not available in assets). playSound will no-op gracefully. -->
 
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>

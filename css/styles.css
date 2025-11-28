@@ -386,8 +386,9 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../assets/images/grid-pattern.png');
-    opacity: 0.05;
+    /* Subtle gradient to replace missing grid-pattern asset */
+    background: radial-gradient(circle at 10% 10%, rgba(var(--accent-color-rgb),0.06), transparent 20%), radial-gradient(circle at 90% 90%, rgba(var(--primary-color-rgb),0.03), transparent 25%);
+    opacity: 0.08;
     z-index: -10; /* Lower z-index to be behind the ping pong canvas */
     pointer-events: none;
 }
@@ -666,7 +667,8 @@ img {
 .loading-icon {
     width: 100px;
     height: 100px;
-    background-image: url('../assets/images/loading-icon.png');
+    /* fallback to existing logo image for loading icon */
+    background-image: url('../assets/images/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -845,7 +847,7 @@ img {
 .pixel-character {
     width: 250px;
     height: 250px;
-    background-image: url('../assets/images/avatar.png');
+    background-image: url('../assets/images/avatar1.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1047,7 +1049,7 @@ img {
 .character-avatar {
     width: 200px;
     height: 200px;
-    background-image: url('../assets/images/avatar.png');
+    background-image: url('../assets/images/avatar-small.png');
     background-size: cover;
     background-position: center;
     border: 3px solid var(--primary-color);

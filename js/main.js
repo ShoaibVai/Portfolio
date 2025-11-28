@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (backgroundMusic) {
         // Start muted (autoplay) but if user had sound enabled previously, unmute after interaction or toggle
         backgroundMusic.muted = true;
-        console.log('Background music initialized:', {
+        console.debug('Background music initialized:', {
             src: backgroundMusic.src,
             muted: backgroundMusic.muted,
             autoplay: backgroundMusic.autoplay,
@@ -51,16 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Start background music automatically if sound is enabled
     if (soundEnabled && backgroundMusic) {
-        console.log('Attempting to start background music...', { soundEnabled, musicStarted });
+        console.debug('Attempting to start background music...', { soundEnabled, musicStarted });
         // Add a small delay to ensure the audio element is ready
         setTimeout(() => {
-            console.log('Background music element:', backgroundMusic, 'Muted:', backgroundMusic.muted);
+            console.debug('Background music element:', backgroundMusic, 'Muted:', backgroundMusic.muted);
             backgroundMusic.play().then(() => {
                 musicStarted = true;
                 // If it started muted due to autoplay policy, keep muted until user interaction
-                console.log('Background music started automatically');
+                console.debug('Background music started automatically');
             }).catch(e => {
-                console.log('Auto-play prevented by browser, will start on first user interaction:', e);
+                console.debug('Auto-play prevented by browser, will start on first user interaction:', e);
                 // Add event listener for first user interaction
                 addDeferredAudioStartHandlers();
             });
@@ -130,20 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function preloadAssets() {
     // Gather all assets to preload
     const images = [
-        'assets/images/avatar.jpg',
-        'assets/images/avatar-small.jpg',
-        'assets/images/pixel-character.png',
-        'assets/images/project1.jpg',
-        'assets/images/project2.jpg',
-        'assets/images/project3.jpg',
-        'assets/images/loading-icon.png',
-        'assets/images/grid-pattern.png'
+        'assets/images/avatar1.png',
+        'assets/images/avatar-small.png',
+        'assets/images/logo.png'
     ];
     
+    // Only preload sounds that actually exist in the repo
     const sounds = [
-        'assets/sounds/button-click.mp3',
-        'assets/sounds/hover.mp3',
-        'assets/sounds/start.mp3'
+        'assets/sounds/Pixelated Dreams.mp3'
     ];
     
     assets = [...images, ...sounds];
@@ -308,31 +302,31 @@ function updateThemeIcon() {
 
 // Toggle sound on/off
 function toggleSound() {
-    console.log('Toggle sound clicked. Current state:', { soundEnabled, musicStarted });
+    console.debug('Toggle sound clicked. Current state:', { soundEnabled, musicStarted });
     soundEnabled = !soundEnabled;
     updateSoundIcon();
     
     if (soundEnabled) {
         playSound('click-sound');
         // Start background music if not already started
-        if (!musicStarted && backgroundMusic) {
-            console.log('Starting background music via toggle...');
+            if (!musicStarted && backgroundMusic) {
+                console.debug('Starting background music via toggle...');
             backgroundMusic.muted = false;
             backgroundMusic.play().then(() => {
                 musicStarted = true;
-                console.log('BGM started via sound toggle');
-            }).catch(e => console.log('BGM play failed:', e));
+                    console.debug('BGM started via sound toggle');
+            }).catch(e => console.debug('BGM play failed:', e));
         } else if (backgroundMusic) {
-            console.log('Resuming background music via toggle...');
+            console.debug('Resuming background music via toggle...');
             backgroundMusic.muted = false;
             if (backgroundMusic.paused) {
-                backgroundMusic.play().catch(e => console.log('BGM resume failed:', e));
+                    backgroundMusic.play().catch(e => console.debug('BGM resume failed:', e));
             }
         }
     } else {
         // Pause background music
         if (backgroundMusic) {
-            console.log('Pausing background music via toggle...');
+            console.debug('Pausing background music via toggle...');
             backgroundMusic.pause();
         }
     }
@@ -343,20 +337,20 @@ function toggleSound() {
 
 // Start music on first user interaction (fallback for autoplay restrictions)
 function startMusicOnFirstInteraction() {
-    console.log('First interaction handler triggered', { soundEnabled, musicStarted });
+    console.debug('First interaction handler triggered', { soundEnabled, musicStarted });
     if (soundEnabled && backgroundMusic && !musicStarted) {
-        console.log('Attempting to start music on first interaction...');
+           console.debug('Attempting to start music on first interaction...');
         backgroundMusic.muted = false; // unmute first
         backgroundMusic.play().then(() => {
             musicStarted = true;
-            console.log('Background music started on first user interaction');
+              console.debug('Background music started on first user interaction');
         }).catch(e => {
-            console.log('Failed to start background music:', e);
+              console.debug('Failed to start background music:', e);
         });
     } else if (soundEnabled && backgroundMusic && musicStarted && backgroundMusic.muted) {
         // Music already started but muted, just unmute
         backgroundMusic.muted = false;
-        console.log('Background music unmuted on first interaction');
+           console.debug('Background music unmuted on first interaction');
     }
 }
 
@@ -688,19 +682,15 @@ function initSideNoteToggle() {
 // Create anchored decorative elements
 function createAnchoredDecorations() {
     // PNG images for floating decorations
+    // Only include PNG images that actually exist in the confetti folder
     const pngImages = [
         'assets/images/confetti-images/1.png',
-        'assets/images/confetti-images/2.png',
         'assets/images/confetti-images/3.png',
         'assets/images/confetti-images/4.png',
         'assets/images/confetti-images/5.png',
         'assets/images/confetti-images/6.png',
         'assets/images/confetti-images/7.png',
-        'assets/images/confetti-images/8.png',
-        'assets/images/confetti-images/9.png',
-        'assets/images/confetti-images/10.png',
-        'assets/images/confetti-images/11.png',
-        'assets/images/confetti-images/12.png'
+        'assets/images/confetti-images/10.png'
     ];
     
     // GIF images for static decorations

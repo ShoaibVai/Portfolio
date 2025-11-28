@@ -12,7 +12,7 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Projects | Shoaib Ibna Omar - Game Developer & AR/VR Engineer">
     <meta property="og:description" content="Explore innovative game development projects including AR/VR applications, Unity games, and mobile development solutions by Shoaib Ibna Omar.">
-    <meta property="og:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar.png">
+    <meta property="og:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar1.png">
     <meta property="og:image:alt" content="Pixel avatar of Shoaib Ibna Omar">
     <meta property="og:url" content="https://shoaibibnaomar.netlify.app/projects.html">
     <meta property="og:type" content="website">
@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Projects | Shoaib Ibna Omar - Game Developer">
     <meta name="twitter:description" content="Explore innovative game development projects including AR/VR applications, Unity games, and mobile development solutions.">
-    <meta name="twitter:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar.png">
+    <meta name="twitter:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar1.png">
     <meta name="twitter:image:alt" content="Pixel avatar of Shoaib Ibna Omar">
     <meta name="twitter:url" content="https://shoaibibnaomar.netlify.app/projects.html">
     <meta name="twitter:site" content="@ShoaibVai">
@@ -42,17 +42,14 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="apple-touch-icon" href="assets/images/logo.png">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/styles.min.css">
     <link rel="stylesheet" href="css/skilltree.min.css">
     <link rel="stylesheet" href="css/animations.min.css">
     <link rel="stylesheet" href="css/responsive.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Preload sounds -->
-    <link rel="preload" href="assets/sounds/button-click.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/hover.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/start.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/Pixelated Dreams.mp3" as="audio">
+    <!-- Preload sounds removed; the audio element will load the file on demand. -->
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -148,7 +145,7 @@
                 <!-- server_batch_downloader -->
                 <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
                     <div class="project-image">
-                        <img src="assets/images/avatar.png" alt="server_batch_downloader project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                        <img src="assets/images/logo.png" alt="server_batch_downloader project thumbnail" width="600" height="400" loading="lazy" decoding="async">
                     </div>
                     <div class="project-info">
                         <div class="project-type">GUI | Python</div>
@@ -169,7 +166,7 @@
                 <!-- AR-Measurement -->
                 <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
                     <div class="project-image">
-                        <img src="assets/images/avatar.png" alt="AR-Measurement project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                        <img src="assets/images/logo.png" alt="AR-Measurement project thumbnail" width="600" height="400" loading="lazy" decoding="async">
                     </div>
                     <div class="project-info">
                         <div class="project-type">AR | Unity</div>
@@ -259,7 +256,7 @@
                 <!-- CoWork360—Multiplayer XR -->
                 <article class="project-card" data-animation="hidden" data-aos="zoom-in" data-aos-duration="700">
                     <div class="project-image">
-                        <img src="assets/images/avatar.png" alt="CoWork360 Multiplayer XR project thumbnail" width="600" height="400" loading="lazy" decoding="async">
+                        <img src="assets/images/logo.png" alt="CoWork360 Multiplayer XR project thumbnail" width="600" height="400" loading="lazy" decoding="async">
                     </div>
                     <div class="project-info">
                         <div class="project-type">XR | Multiplayer</div>
@@ -331,15 +328,7 @@
     </footer>
 
     <!-- Audio Elements -->
-    <audio id="click-sound" preload="auto">
-        <source src="assets/sounds/button-click.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="hover-sound" preload="auto">
-        <source src="assets/sounds/hover.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="start-sound" preload="auto">
-        <source src="assets/sounds/start.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Optional click/hover/start sounds removed (not available in assets). playSound will no-op gracefully. -->
 
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>

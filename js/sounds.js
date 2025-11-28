@@ -36,19 +36,9 @@ const SoundManager = {
     
     // Create additional sound effects that weren't in HTML
     createAdditionalSounds() {
-        // Achievement sound
-        this.sounds.achievement = new Audio();
-        this.sounds.achievement.src = 'assets/sounds/achievement.mp3';
-        this.sounds.achievement.preload = 'auto';
-        
-        // Transition sound
-        this.sounds.transition = new Audio();
-        this.sounds.transition.src = 'assets/sounds/transition.mp3';
-        this.sounds.transition.preload = 'auto';
-        
-        // Apply volume to new sounds
-        this.sounds.achievement.volume = this.settings.volume;
-        this.sounds.transition.volume = this.settings.volume;
+        // Additional dynamic sounds were intentionally removed to avoid
+        // loading non-existent assets. Only background music (if present)
+        // should be used by the site for audio ambience.
     },
     
     // Play a sound effect

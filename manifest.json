@@ -26,7 +26,7 @@
     "categories": ["portfolio", "games", "developer", "technology"],
     "screenshots": [
         {
-            "src": "assets/images/avatar.png",
+            "src": "assets/images/avatar1.png",
             "sizes": "420x420",
             "type": "image/png",
             "form_factor": "wide"

@@ -12,7 +12,7 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Blog | Shoaib Ibna Omar - Game Developer & AR/VR Engineer">
     <meta property="og:description" content="Read insights on game development, AR/VR technology, Unity programming, and industry trends from game developer Shoaib Ibna Omar.">
-    <meta property="og:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar.png">
+    <meta property="og:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar1.png">
     <meta property="og:image:alt" content="Pixel avatar of Shoaib Ibna Omar">
     <meta property="og:url" content="https://shoaibibnaomar.netlify.app/blogs.html">
     <meta property="og:type" content="website">
@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Blog | Shoaib Ibna Omar - Game Developer">
     <meta name="twitter:description" content="Read insights on game development, AR/VR technology, Unity programming, and industry trends.">
-    <meta name="twitter:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar.png">
+    <meta name="twitter:image" content="https://shoaibibnaomar.netlify.app/assets/images/avatar1.png">
     <meta name="twitter:image:alt" content="Pixel avatar of Shoaib Ibna Omar">
     <meta name="twitter:url" content="https://shoaibibnaomar.netlify.app/blogs.html">
     <meta name="twitter:site" content="@ShoaibVai">
@@ -42,17 +42,14 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="apple-touch-icon" href="assets/images/logo.png">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/styles.min.css">
     <link rel="stylesheet" href="css/skilltree.min.css">
     <link rel="stylesheet" href="css/animations.min.css">
     <link rel="stylesheet" href="css/responsive.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Preload sounds -->
-    <link rel="preload" href="assets/sounds/button-click.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/hover.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/start.mp3" as="audio">
-    <link rel="preload" href="assets/sounds/Pixelated Dreams.mp3" as="audio">
+    <!-- Preload sounds removed; audio element will manage playback -->
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -140,15 +137,7 @@
     </footer>
 
     <!-- Audio Elements -->
-    <audio id="click-sound" preload="auto">
-        <source src="assets/sounds/button-click.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="hover-sound" preload="auto">
-        <source src="assets/sounds/hover.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="start-sound" preload="auto">
-        <source src="assets/sounds/start.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Optional click/hover/start sounds removed (not available in assets). playSound will no-op gracefully. -->
 
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
