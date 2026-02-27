@@ -508,7 +508,8 @@ img {
 /* Side Note Bubble (overlay beside roles without shifting layout) */
 .intro-roles-wrapper {
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     margin-top: 1rem;
 }
 
@@ -561,50 +562,14 @@ img {
 
 .section-subtitle.mini::before { display: none; }
 
-/* Stylized role display (typed) */
-#typed-roles {
-    font-family: var(--game-font);
-    font-size: clamp(1rem, 3.2vw, 1.6rem);
-    color: var(--accent-color);
-    font-weight: 400;
-    display: inline-block;
-    padding: 0;
-    border-radius: 0;
-    background: none;
-    border: none;
-    box-shadow: none;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-}
-
-#typed-roles:hover {
-    transform: translateY(-2px);
-    box-shadow: none;
-}
-
-#typed-roles::before {
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-    border-radius: 50%;
-    margin-right: 8px;
-    vertical-align: middle;
-}
-
 .side-note {
-    position: absolute;
-    top: 50%;
-    left: calc(100% + 12px);
-    transform: translateY(-50%);
+    position: relative;
     display: flex;
     align-items: center;
     gap: 8px;
     width: 380px;
-    max-width: 52vw;
-    min-width: 300px;
+    max-width: 90vw;
+    margin: 0 auto;
     padding: 14px 18px;
     /* glassy, transparent look while theme-aware */
     background: rgba(var(--card-background-rgb), 0.28);
@@ -618,16 +583,7 @@ img {
 }
 
 .side-note::after {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid rgba(var(--card-background-rgb), 0.28);
+    display: none;
 }
 
 .side-note-content { max-height: 500px; overflow: hidden; transition: max-height var(--transition-speed) ease, opacity var(--transition-speed) ease; }
@@ -1899,83 +1855,76 @@ footer {
     .avatar-visualizer-wrapper .intro-avatar { width: 300px; height: 300px; }
 }
 
-.roles-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
-    padding: 0;
-}
-
-.role-item {
-    font-family: var(--game-font);
-    font-size: 1.5rem;
-    color: var(--text-color);
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: none;
-    position: relative;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    font-weight: normal;
-}
-
-.role-item::before,
-.role-item::after {
-    content: '';
+/* Floating Roles */
+.floating-role {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0;
-    transition: all 0.3s ease;
-    font-family: var(--game-font);
-    font-size: 1.5rem;
-    color: var(--accent-color);
-    font-weight: bold;
+    background: rgba(var(--card-background-rgb), 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(var(--primary-color-rgb), 0.4);
+    color: var(--text-color);
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: float-role 4s ease-in-out infinite, glitch-role 5s infinite;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.role-item::before {
-    content: '<';
-    left: -25px;
+.floating-role:hover {
+    transform: scale(1.15) translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(var(--accent-color-rgb), 0.4);
+    border-color: var(--accent-color);
+    z-index: 10;
+    animation: none; /* Pause floating/glitching on hover */
 }
 
-.role-item::after {
-    content: '>';
-    right: -25px;
+[data-theme="dark"] .floating-role {
+    background: rgba(var(--card-background-rgb), 0.6);
+    border: 1px solid rgba(var(--accent-color-rgb), 0.4);
 }
 
-.role-item:hover {
-    color: var(--secondary-color);
-    transform: scale(1.05);
+@keyframes float-role {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
-.role-item:hover::before,
-.role-item:hover::after {
-    opacity: 1;
-    animation: bracketGlow 0.3s ease-in-out;
+@keyframes float-role-center {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -10px); }
 }
 
-.role-item:hover::before {
-    left: -20px;
+@keyframes glitch-role {
+    0%, 90%, 100% { clip-path: none; filter: none; }
+    92% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); transform: translate(-2px, 2px); filter: hue-rotate(90deg); }
+    94% { clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%); transform: translate(2px, -2px); filter: hue-rotate(-90deg); }
+    96% { clip-path: polygon(0 80%, 100% 80%, 100% 90%, 0 90%); transform: translate(-2px, -2px); filter: invert(1); }
+    98% { clip-path: none; transform: translate(2px, 2px); filter: none; }
 }
 
-.role-item:hover::after {
-    right: -20px;
-}
+/* Mobile Positions */
+.role-1 { top: 5%; left: -10%; animation-delay: 0s; }
+.role-2 { top: 15%; right: -10%; animation-delay: 0.8s; }
+.role-3 { bottom: 15%; left: -5%; animation-delay: 1.6s; }
+.role-4 { bottom: 20%; right: -5%; animation-delay: 2.4s; }
+.role-5 { top: -5%; left: 50%; transform: translateX(-50%); animation-delay: 3.2s; animation-name: float-role-center; }
 
-@keyframes bracketGlow {
-    0% {
-        opacity: 0;
-        transform: translateY(-50%) scale(0.8);
+/* Tablet & Desktop Positions */
+@media (min-width: 768px) {
+    .floating-role {
+        padding: 8px 16px;
+        font-size: 1rem;
     }
-    50% {
-        transform: translateY(-50%) scale(1.1);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(-50%) scale(1);
-    }
+    .role-1 { top: 10%; left: -20%; }
+    .role-2 { top: 20%; right: -25%; }
+    .role-3 { bottom: 15%; left: -15%; }
+    .role-4 { bottom: 25%; right: -20%; }
+    .role-5 { top: -10%; }
 }
 
 /* Start CTA in hero */
@@ -1996,15 +1945,10 @@ footer {
 /* Responsive: stack note below roles on small screens */
 @media (max-width: 768px) {
     .intro-roles-wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-    .side-note {
-        position: static;
-        transform: none;
-        margin-top: 0.75rem;
-        max-width: 100%;
-    }
-    .side-note::after { display: none; }
 }
 
 /* Ensure header allows overlay to be visible */

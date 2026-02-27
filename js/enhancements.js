@@ -13,25 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize Typed.js
-    if (typeof Typed !== 'undefined' && document.getElementById('typed-roles')) {
-        new Typed('#typed-roles', {
-            strings: [
-                'Project Manager',
-                'Game Designer',
-                'Game Developer',
-                'QA Test',
-                'Business Analyst'
-            ],
-            typeSpeed: 50,
-            backSpeed: 30,
-            backDelay: 2000,
-            loop: true,
-            cursorChar: '_',
-            smartBackspace: true
-        });
-    }
-
     // Initialize Vanilla Tilt for cards (only on non-touch / large screens)
     if (typeof VanillaTilt !== 'undefined' && !window.matchMedia('(pointer: coarse)').matches && window.innerWidth > 768) {
         const cards = document.querySelectorAll('.experience-card, .project-card, .achievement-card, .blog-card');
