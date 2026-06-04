@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="css/skilltree.min.css">
     <link rel="stylesheet" href="css/animations.min.css">
     <link rel="stylesheet" href="css/responsive.min.css">
+    <link rel="stylesheet" href="css/TargetCursor.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Performance optimizations -->
@@ -147,14 +148,14 @@
 
     <!-- Audio Controls -->
     <div id="audio-controls">
-    <button id="toggle-sound" aria-label="Toggle Sound" aria-pressed="false">
+    <button id="toggle-sound" class="cursor-target" aria-label="Toggle Sound" aria-pressed="false">
             <i class="fas fa-volume-up"></i>
         </button>
     </div>
 
     <!-- Theme Toggle -->
     <div id="theme-toggle">
-    <button id="toggle-theme" aria-label="Toggle Theme" aria-pressed="false">
+    <button id="toggle-theme" class="cursor-target" aria-label="Toggle Theme" aria-pressed="false">
             <i class="fas fa-sun"></i>
         </button>
         <!-- Text size toggle removed per request -->
@@ -170,17 +171,17 @@
             <!-- Desktop Navigation -->
             <div class="nav-menu" id="nav-menu">
                 <ul class="nav-links">
-                    <li><a href="#skills" class="nav-link" aria-label="Skills">Skills</a></li>
-                    <li><a href="#experience" class="nav-link" aria-label="Experience">Experience</a></li>
-                    <li><a href="projects.html" class="nav-link" aria-label="Projects">Projects</a></li>
-                    <li><a href="achievements.html" class="nav-link" aria-label="Achievements">Achievements</a></li>
-                    <li><a href="blogs.html" class="nav-link" aria-label="Blogs">Blogs</a></li>
-                    <li><a href="#contact" class="nav-link" aria-label="Contact">Contact</a></li>
+                    <li><a href="#skills" class="nav-link cursor-target" aria-label="Skills">Skills</a></li>
+                    <li><a href="#experience" class="nav-link cursor-target" aria-label="Experience">Experience</a></li>
+                    <li><a href="projects.html" class="nav-link cursor-target" aria-label="Projects">Projects</a></li>
+                    <li><a href="achievements.html" class="nav-link cursor-target" aria-label="Achievements">Achievements</a></li>
+                    <li><a href="blogs.html" class="nav-link cursor-target" aria-label="Blogs">Blogs</a></li>
+                    <li><a href="#contact" class="nav-link cursor-target" aria-label="Contact">Contact</a></li>
                 </ul>
             </div>
             
             <!-- Mobile Menu Toggle -->
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+            <button class="nav-toggle cursor-target" id="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -201,11 +202,11 @@
                     <img src="assets/images/avatar1.png" alt="Pixel avatar of Shoaib Ibna Omar" class="intro-avatar" width="420" height="420" decoding="async">
                 </picture>
                 <!-- Floating Roles -->
-                <div class="floating-role role-1">Project Manager</div>
-                <div class="floating-role role-2">Game Designer</div>
-                <div class="floating-role role-3">Game Developer</div>
-                <div class="floating-role role-4">QA Test</div>
-                <div class="floating-role role-5">Business Analyst</div>
+                <div class="floating-role role-1 cursor-target">Project Manager</div>
+                <div class="floating-role role-2 cursor-target">Game Designer</div>
+                <div class="floating-role role-3 cursor-target">Game Developer</div>
+                <div class="floating-role role-4 cursor-target">QA Test</div>
+                <div class="floating-role role-5 cursor-target">Business Analyst</div>
             </div>
             <h1>Shoaib Ibna Omar</h1>
             <div class="intro-roles-wrapper">
@@ -222,7 +223,7 @@
 
             <!-- Start CTA -->
             <div class="start-cta">
-                <button id="start-button" class="game-button start-button" aria-label="Start">
+                <button id="start-button" class="game-button start-button cursor-target" aria-label="Start">
                     START
                 </button>
                 <p class="start-hint">Click START or press ENTER</p>
@@ -249,85 +250,85 @@
 
     
 
-    <!-- Experience Section -->
-    <section id="experience" class="game-section" data-aos="fade-up" data-aos-duration="800">
-        <div class="section-container">
-            <div class="section-header">
-                <h2>Adventure Log</h2>
-            </div>
-            <div class="experience-grid">
-                <!-- IT & Management Column -->
-                <div class="experience-column">
-                    <h3 class="experience-subtitle">IT &amp; Management</h3>
-                    <div class="experience-card" data-aos="fade-up" data-aos-duration="700">
-                        <div class="experience-date">2023 – 2025</div>
-                        <h4>President &amp; Game Developer</h4>
-                        <h5>AR/VR &amp; Game Development Lab, DIU</h5>
-                        <ul class="experience-points">
-                            <li><strong>Managed</strong> 7+ concurrent prototype & research projects</li>
-                            <li><strong>Developed</strong> 2 Unity-based games from concept to playable builds</li>
-                            <li><strong>Trained</strong> & mentored 20 students (gameplay architecture, optimization, AR/VR pipelines)</li>
-                            <li><strong>Organized</strong> 2 community events to accelerate peer learning & showcase demos</li>
-                            <li><strong>Represented</strong> the lab in a government innovation workshop</li>
-                        </ul>
+            <!-- Experience Section -->
+            <section id="experience" class="game-section" data-aos="fade-up" data-aos-duration="800">
+                <div class="section-container">
+                    <div class="section-header">
+                        <h2>Adventure Log</h2>
                     </div>
-                    <div class="experience-card" data-aos="fade-up" data-aos-duration="700">
-                        <div class="experience-date">Jan 2025 – Jul 2025</div>
-                        <h4>Game Developer Intern (Remote)</h4>
-                        <h5>Aamira Software Solution (Indiana, USA)</h5>
-                        <ul class="experience-points">
-                            <li><strong>Developed</strong> an AR prototype using Unity (C# + ARCore)</li>
-                            <li><strong>Managed</strong> sprint workflow & structured intern task board</li>
-                        </ul>
-                    </div>
-                </div>
+                    <div class="experience-grid">
+                        <!-- IT & Management Column -->
+                        <div class="experience-column">
+                            <h3 class="experience-subtitle">IT &amp; Management</h3>
+                            <div class="experience-card cursor-target" data-aos="fade-up" data-aos-duration="700">
+                                <div class="experience-date">2023 – 2025</div>
+                                <h4>President &amp; Game Developer</h4>
+                                <h5>AR/VR &amp; Game Development Lab, DIU</h5>
+                                <ul class="experience-points">
+                                    <li><strong>Managed</strong> 7+ concurrent prototype & research projects</li>
+                                    <li><strong>Developed</strong> 2 Unity-based games from concept to playable builds</li>
+                                    <li><strong>Trained</strong> & mentored 20 students (gameplay architecture, optimization, AR/VR pipelines)</li>
+                                    <li><strong>Organized</strong> 2 community events to accelerate peer learning & showcase demos</li>
+                                    <li><strong>Represented</strong> the lab in a government innovation workshop</li>
+                                </ul>
+                            </div>
+                            <div class="experience-card cursor-target" data-aos="fade-up" data-aos-duration="700">
+                                <div class="experience-date">Jan 2025 – Jul 2025</div>
+                                <h4>Game Developer Intern (Remote)</h4>
+                                <h5>Aamira Software Solution (Indiana, USA)</h5>
+                                <ul class="experience-points">
+                                    <li><strong>Developed</strong> an AR prototype using Unity (C# + ARCore)</li>
+                                    <li><strong>Managed</strong> sprint workflow & structured intern task board</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <!-- Bridge / Hybrid Role -->
-                <div class="experience-bridge">
-                    <div class="experience-card bridge-card" data-aos="zoom-in" data-aos-duration="700">
-                        <div class="experience-date">Jan 2025 – Present</div>
-                        <h4>Game Developer &amp; Business Development Manager</h4>
-                        <h5>Growbrandly, Dhaka, Bangladesh</h5>
-                        <ul class="experience-points">
-                            <li><strong>Prototyped</strong> core gameplay loops & progression systems</li>
-                            <li><strong>Optimized</strong> performance (frame pacing, memory, load flow)</li>
-                            <li><strong>Designed</strong> monetization hooks (retention loops & value packs)</li>
-                            <li><strong>Negotiated</strong> partner & client opportunities to expand pipeline</li>
-                        </ul>
-                    </div>
-                </div>
+                        <!-- Bridge / Hybrid Role -->
+                        <div class="experience-bridge">
+                            <div class="experience-card bridge-card cursor-target" data-aos="zoom-in" data-aos-duration="700">
+                                <div class="experience-date">Jan 2025 – Present</div>
+                                <h4>Game Developer &amp; Business Development Manager</h4>
+                                <h5>Growbrandly, Dhaka, Bangladesh</h5>
+                                <ul class="experience-points">
+                                    <li><strong>Prototyped</strong> core gameplay loops & progression systems</li>
+                                    <li><strong>Optimized</strong> performance (frame pacing, memory, load flow)</li>
+                                    <li><strong>Designed</strong> monetization hooks (retention loops & value packs)</li>
+                                    <li><strong>Negotiated</strong> partner & client opportunities to expand pipeline</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <!-- Business & Marketing Column -->
-                <div class="experience-column">
-                    <h3 class="experience-subtitle">Business &amp; Marketing</h3>
-                    <div class="experience-card" data-aos="fade-up" data-aos-duration="700">
-                        <div class="experience-date">Jun 2023 – Present</div>
-                        <h4>Social Media Manager</h4>
-                        <h5>Sister’s Group Limited</h5>
-                        <ul class="experience-points">
-                            <li><strong>Owned</strong> end‑to‑end content & campaign lifecycle</li>
-                            <li><strong>Analyzed</strong> audience segments to refine targeting & messaging</li>
-                            <li><strong>Produced</strong> cross‑format creative assets (static, short‑form, interactive)</li>
-                            <li><strong>Tracked</strong> KPIs (reach, CTR, retention) to iterate data‑driven improvements</li>
-                            <li><strong>Optimized</strong> paid targeting & spend allocation to expand engagement</li>
-                        </ul>
-                    </div>
-                    <div class="experience-card">
-                        <div class="experience-date">2024 – Present</div>
-                        <h4>Contractual Marketing Executive</h4>
-                        <h5>Niloyflix • Stype • Metaform</h5>
-                        <ul class="experience-points">
-                            <li><strong>Advised</strong> marketing campaign strategy (audience, positioning, funnel touchpoints)</li>
-                            <li><strong>Executed</strong> digital marketing campaigns across social, email & landing pages</li>
-                            <li><strong>Optimized</strong> conversion funnel via iterative A/B tests & retention signals</li>
-                            <li><strong>Produced</strong> multi‑platform creative assets aligned with brand messaging</li>
-                            <li><strong>Analyzed</strong> performance dashboards to recommend data‑driven adjustments</li>
-                        </ul>
+                        <!-- Business & Marketing Column -->
+                        <div class="experience-column">
+                            <h3 class="experience-subtitle">Business &amp; Marketing</h3>
+                            <div class="experience-card cursor-target" data-aos="fade-up" data-aos-duration="700">
+                                <div class="experience-date">Jun 2023 – Present</div>
+                                <h4>Social Media Manager</h4>
+                                <h5>Sister’s Group Limited</h5>
+                                <ul class="experience-points">
+                                    <li><strong>Owned</strong> end‑to‑end content & campaign lifecycle</li>
+                                    <li><strong>Analyzed</strong> audience segments to refine targeting & messaging</li>
+                                    <li><strong>Produced</strong> cross‑format creative assets (static, short‑form, interactive)</li>
+                                    <li><strong>Tracked</strong> KPIs (reach, CTR, retention) to iterate data‑driven improvements</li>
+                                    <li><strong>Optimized</strong> paid targeting & spend allocation to expand engagement</li>
+                                </ul>
+                            </div>
+                            <div class="experience-card cursor-target">
+                                <div class="experience-date">2024 – Present</div>
+                                <h4>Contractual Marketing Executive</h4>
+                                <h5>Niloyflix • Stype • Metaform</h5>
+                                <ul class="experience-points">
+                                    <li><strong>Advised</strong> marketing campaign strategy (audience, positioning, funnel touchpoints)</li>
+                                    <li><strong>Executed</strong> digital marketing campaigns across social, email & landing pages</li>
+                                    <li><strong>Optimized</strong> conversion funnel via iterative A/B tests & retention signals</li>
+                                    <li><strong>Produced</strong> multi‑platform creative assets aligned with brand messaging</li>
+                                    <li><strong>Analyzed</strong> performance dashboards to recommend data‑driven adjustments</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
         </div>
     </section>
 
@@ -347,15 +348,15 @@
                         <p>Thanks for visiting — I’m actively seeking game development and AR/VR roles. Select a channel below or download my resume to discuss opportunities.</p>
                     </div>
                     <div class="dialogue-options">
-                        <a href="mailto:shoaibibnaomar@gmail.com" class="dialogue-option">
+                        <a href="mailto:shoaibibnaomar@gmail.com" class="dialogue-option cursor-target">
                             <i class="fas fa-envelope"></i>
                             <span>Email</span>
                         </a>
-                        <a href="https://www.linkedin.com/in/shoaibibnaomar" target="_blank" class="dialogue-option">
+                        <a href="https://www.linkedin.com/in/shoaibibnaomar" target="_blank" class="dialogue-option cursor-target">
                             <i class="fab fa-linkedin"></i>
                             <span>LinkedIn</span>
                         </a>
-                        <a href="https://github.com/ShoaibVai" target="_blank" class="dialogue-option">
+                        <a href="https://github.com/ShoaibVai" target="_blank" class="dialogue-option cursor-target">
                             <i class="fab fa-github"></i>
                             <span>GitHub</span>
                         </a>
@@ -377,7 +378,7 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" rows="4" required aria-required="true"></textarea>
                         </div>
-                        <button type="submit" class="game-button">Send Message</button>
+                        <button type="submit" class="game-button cursor-target">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -405,6 +406,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js" defer></script>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js" defer></script>
 
+    <!-- TargetCursor (requires GSAP) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="js/TargetCursor.min.js" defer></script>
+
     <!-- Main App + Enhancements -->
     <script src="js/main.min.js" defer></script>
     <script src="js/enhancements.min.js" defer></script>
@@ -412,5 +417,18 @@
     <script src="js/skilltree.min.js" defer></script>
     <script src="js/sounds.min.js" defer></script>
     <script src="js/pingpong.min.js" defer></script>
+    <script>
+        // Initialize the custom target cursor once the page is fully loaded
+        // and all defer'd scripts (GSAP, TargetCursor) have executed.
+        window.addEventListener('load', function () {
+            if (window.TargetCursor) {
+                window.TargetCursor.init({
+                    spinDuration: 2,
+                    hideDefaultCursor: true,
+                    parallaxOn: true
+                });
+            }
+        });
+    </script>
 </body>
 </html>
