@@ -194,16 +194,16 @@ html {
 
 .nav-link {
     font-family: var(--pixel-font);
-    font-size: 0.9rem; /* Base nav link size, aligns with root clamp min 12px */
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
     color: var(--text-color);
     text-decoration: none;
-    padding: 8px 12px;
+    padding: 6px 10px;
     border-radius: var(--border-radius);
     transition: all var(--transition-speed) ease;
     position: relative;
     overflow: hidden;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     white-space: nowrap;
     display: inline-block;
 }

@@ -23,7 +23,7 @@
 }
 
 /* Mobile Navigation Styles */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .nav-toggle {
         display: flex;
     }
@@ -221,13 +221,13 @@
     }
 
     .nav-links {
-        font-size: 0.95rem; /* slightly larger for readability */
+        font-size: 0.85rem; /* slightly larger for readability */
         gap: 0.8rem;
     }
 
     .nav-link {
-        font-size: 0.95rem;
-        padding: 8px 15px;
+        font-size: 0.85rem;
+        padding: 6px 12px;
     }
 
     /* Adjust theme and audio controls for large screens */
@@ -243,7 +243,7 @@
 }
 
 /* Tablet and Medium Desktop Screens */
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
     /* Reset mobile nav styles */
     .nav-toggle {
         display: none;
@@ -260,8 +260,8 @@
     }
 
     .nav-links {
-        font-size: 0.9rem;
-        gap: 0.8rem;
+        font-size: 0.75rem;
+        gap: 0.6rem;
         padding: 0;
         height: auto;
     }
@@ -276,8 +276,8 @@
     }
 
     .nav-link {
-        font-size: 0.9rem;
-        padding: 8px 10px;
+        font-size: 0.75rem;
+        padding: 6px 8px;
         border: none;
         border-radius: var(--border-radius);
     }
@@ -390,19 +390,6 @@
 
 /* Large Devices (Desktops) */
 @media (min-width: 992px) {
-    .nav-links {
-        gap: 2rem;
-    }
-
-    .nav-link {
-        font-size: 1rem;
-        padding: 10px 20px;
-    }
-
-    .nav-container {
-        padding: 0 30px;
-    }
-
     .section-container {
         padding: 30px;
     }
