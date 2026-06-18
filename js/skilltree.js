@@ -31,6 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
       title: "TEST & REVIEW",
       skills: ["Quality Assurance Test"],
       tools: ["Selenium", "Jest", "Cypress", "Jira", "TestRail"]
+    },
+    {
+      phase: 6,
+      title: "AI ENGINEERING",
+      skills: ["LLM Integration & Prompt Engineering", "RAG (Retrieval-Augmented Generation)", "Agentic Workflows & Multi-Agent Systems", "Fine-tuning & Model Optimization", "Vector Search & Embeddings", "AI Application Architecture"],
+      tools: ["Python", "PyTorch", "TensorFlow", "LangChain", "LangGraph", "LangSmith", "OpenAI API", "Anthropic API", "LM Studio", "Ollama", "Hugging Face", "Pinecone", "Chroma", "Weaviate", "FastAPI", "Next.js", "React", "Laravel"]
     }
   ];
 
