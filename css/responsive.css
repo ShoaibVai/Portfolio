@@ -217,16 +217,17 @@
 @media (min-width: 1200px) {
     .nav-container {
         padding: 0 40px;
-        gap: 3rem;
+        gap: 1.5rem;
     }
 
     .nav-links {
-        font-size: 1rem; /* slightly larger for readability */
+        font-size: 0.95rem; /* slightly larger for readability */
+        gap: 0.8rem;
     }
 
     .nav-link {
-        font-size: 1rem;
-        padding: 10px 20px;
+        font-size: 0.95rem;
+        padding: 8px 15px;
     }
 
     /* Adjust theme and audio controls for large screens */
