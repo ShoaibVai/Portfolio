@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg)"/>
+  <!-- VR headset -->
+  <g transform="translate(300,150)">
+    <rect x="-70" y="-30" width="140" height="60" rx="20" fill="#0f3460" stroke="#e94560" stroke-width="3"/>
+    <!-- Lenses -->
+    <circle cx="-25" cy="0" r="18" fill="#16213e" stroke="#53d769" stroke-width="2"/>
+    <circle cx="25" cy="0" r="18" fill="#16213e" stroke="#53d769" stroke-width="2"/>
+    <!-- Glow -->
+    <circle cx="-25" cy="0" r="8" fill="#53d769" opacity="0.3"/>
+    <circle cx="25" cy="0" r="8" fill="#53d769" opacity="0.3"/>
+    <!-- Strap -->
+    <path d="M-70,-5 Q-100,-5 -100,0" fill="none" stroke="#e94560" stroke-width="3"/>
+    <path d="M70,-5 Q100,-5 100,0" fill="none" stroke="#e94560" stroke-width="3"/>
+  </g>
+  <!-- Connected users -->
+  <g>
+    <!-- User 1 -->
+    <g transform="translate(180,220)">
+      <circle cx="0" cy="0" r="16" fill="#e94560"/>
+      <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="14" fill="#fff">U1</text>
+    </g>
+    <!-- User 2 -->
+    <g transform="translate(300,220)">
+      <circle cx="0" cy="0" r="16" fill="#53d769"/>
+      <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="14" fill="#fff">U2</text>
+    </g>
+    <!-- User 3 -->
+    <g transform="translate(420,220)">
+      <circle cx="0" cy="0" r="16" fill="#f5c518"/>
+      <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="14" fill="#1a1a2e">U3</text>
+    </g>
+  </g>
+  <!-- Connection lines -->
+  <g stroke="#53d769" stroke-width="2" stroke-dasharray="6,3" opacity="0.6">
+    <line x1="196" y1="220" x2="284" y2="220"/>
+    <line x1="316" y1="220" x2="404" y2="220"/>
+    <line x1="180" y1="236" x2="300" y2="236"/>
+    <line x1="300" y1="236" x2="420" y2="236"/>
+  </g>
+  <!-- Voice waves -->
+  <g fill="none" stroke="#f5c518" stroke-width="1.5" opacity="0.5">
+    <path d="M160,210 Q155,200 160,190"/>
+    <path d="M150,210 Q142,195 150,180"/>
+    <path d="M440,210 Q445,200 440,190"/>
+    <path d="M450,210 Q458,195 450,180"/>
+  </g>
+  <!-- Label -->
+  <text x="300" y="300" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="#e94560">CoWork360</text>
+  <text x="300" y="328" text-anchor="middle" font-family="monospace" font-size="14" fill="#a8a8a8">Multiplayer XR Collaboration</text>
+</svg>
