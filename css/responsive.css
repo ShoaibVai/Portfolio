@@ -18,7 +18,7 @@
 @media (min-width: 1025px) {
     :root {
         /* Desktop: large screens get 20px base body text */
-        --body-font-size: var(--body-font-size);
+        --body-font-size: var(--body-font-size-desktop, 1.25rem);
     }
 }
 
@@ -259,15 +259,15 @@
     }
 
     .nav-links {
-        font-size: 1rem;
-        gap: 1.5rem;
+        font-size: 0.9rem;
+        gap: 0.8rem;
         padding: 0;
         height: auto;
     }
 
     .nav-container {
-        padding: 0 25px;
-        gap: 1.5rem;
+        padding: 0 15px;
+        gap: 1rem;
     }
 
     .nav-logo {
@@ -275,8 +275,8 @@
     }
 
     .nav-link {
-        font-size: 1rem;
-        padding: 8px 16px;
+        font-size: 0.9rem;
+        padding: 8px 10px;
         border: none;
         border-radius: var(--border-radius);
     }
@@ -710,7 +710,6 @@ textarea:focus {
 /* Container Width Limits */
 .section-container,
 .menu-container {
-    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
 }

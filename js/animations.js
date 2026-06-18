@@ -185,7 +185,6 @@ const EffectsController = {
         this.setupSkillBarAnimation();
         this.setupProjectCardEffects();
         this.setupAchievementEffects();
-        this.setupLoadingBarAnimation();
     },
     
     // Animate skill bars when visible
@@ -268,23 +267,6 @@ const EffectsController = {
         });
     },
     
-    // Animate loading bar
-    setupLoadingBarAnimation() {
-        const loadingBar = document.querySelector('.loading-progress');
-        if (!loadingBar) return;
-        
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += Math.random() * 10;
-            
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
-            }
-            
-            loadingBar.style.width = `${progress}%`;
-        }, 200);
-    }
 };
 
 // Initialize when document is loaded

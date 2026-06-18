@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Enter key to start (PC users)
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
+            const ae = document.activeElement;
+            if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'BUTTON' || ae.tagName === 'A')) return;
             event.preventDefault(); // Prevent any default behavior
             startGame();
         }
@@ -112,9 +114,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add hover sound to buttons
     addHoverSoundToButtons();
     
-    // Initialize custom cursor if not on mobile
-    if (window.innerWidth > 768) {
-        initCustomCursor();
+    // Initialize EmailJS
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init('nju6MOa-L6VA2UZ7Y');
+    } else {
+        window.addEventListener('load', () => {
+            if (typeof emailjs !== 'undefined') emailjs.init('nju6MOa-L6VA2UZ7Y');
+        });
     }
     
     // Set up intersection observers for scroll animations
@@ -422,10 +428,11 @@ function handleContactFormSubmit(event) {
     })
     .then(function(response) {
         console.log('EmailJS SUCCESS!', response.status, response.text);
+        const escapedName = nameInput.value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         contactForm.innerHTML = `
             <div class="success-message">
                 <h3>Message Sent!</h3>
-                <p>Thank you for your message, ${nameInput.value}. I'll get back to you soon!</p>
+                <p>Thank you for your message, ${escapedName}. I'll get back to you soon!</p>
                 <button type="button" class="game-button" onclick="showSection('main-menu')">Return to Menu</button>
             </div>
         `;
@@ -439,57 +446,7 @@ function handleContactFormSubmit(event) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize EmailJS
-    emailjs.init('nju6MOa-L6VA2UZ7Y');
-    
-    // Other initializations...
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleContactFormSubmit);
-    }
-});
 
-// Initialize custom cursor
-function initCustomCursor() {
-    const cursor = document.createElement('div');
-    cursor.className = 'custom-cursor';
-    document.body.appendChild(cursor);
-    
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-    });
-    
-    document.addEventListener('mousedown', () => {
-        cursor.classList.add('active');
-    });
-    
-    document.addEventListener('mouseup', () => {
-        cursor.classList.remove('active');
-    });
-    
-    // Hide cursor when leaving window
-    document.addEventListener('mouseleave', () => {
-        cursor.style.display = 'none';
-    });
-    
-    document.addEventListener('mouseenter', () => {
-        cursor.style.display = 'block';
-    });
-    
-    // Interactive elements should change cursor state
-    const interactiveElements = document.querySelectorAll('a, button, input, textarea, .project-card, .dialogue-option');
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursor.classList.add('active');
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            cursor.classList.remove('active');
-        });
-    });
-}
 
 // Set up intersection observers for scroll animations
 function setupScrollAnimations() {

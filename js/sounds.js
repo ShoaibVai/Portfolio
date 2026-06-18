@@ -141,25 +141,7 @@ function setupSoundEventListeners() {
         });
     });
     
-    // Toggle sound button
-    const toggleSoundButton = document.getElementById('toggle-sound');
-    if (toggleSoundButton) {
-        toggleSoundButton.addEventListener('click', () => {
-            const soundEnabled = SoundManager.toggleSound();
-            
-            // Update icon
-            const icon = toggleSoundButton.querySelector('i');
-            if (icon) {
-                icon.className = soundEnabled ? 'fas fa-volume-up' : 'fas fa-volume-mute';
-            }
-            
-            // Play confirmation sound if enabled
-            if (soundEnabled) {
-                SoundManager.play('click');
-            }
-        });
-    }
-    
+
     // Add transition sounds when changing sections
     const menuButtons = document.querySelectorAll('.menu-button');
     menuButtons.forEach(button => {

@@ -106,12 +106,7 @@ html {
 }
 
 /* Base typography improvements for readability */
-body {
-    font-family: var(--base-font);
-    font-size: 1rem; /* 16px */
-    line-height: 1.6;
-    color: var(--text-color);
-    -webkit-font-smoothing: antialiased;
+/* (Font smoothing merged into main body block below) */
 
 #main-navigation::before {
     content: '';
@@ -120,8 +115,6 @@ body {
     background: radial-gradient(circle at 20% 20%, rgba(var(--accent-color-rgb), 0.15), transparent 55%);
     opacity: 0.6;
     pointer-events: none;
-}
-    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Text Size Toggle (Accessibility) */
@@ -370,9 +363,12 @@ textarea,
 
 body {
     font-family: var(--base-font);
+    font-size: 1rem;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     transition: background-color var(--transition-speed), color var(--transition-speed);
     overflow-x: hidden;
     position: relative;
@@ -497,7 +493,6 @@ ul, ol {
 button {
     cursor: pointer;
     border: none;
-    outline: none;
 }
 
 img {
@@ -633,7 +628,7 @@ img {
 }
 
 .loading-bar {
-    width: 300px;
+    width: min(300px, 80vw);
     height: 20px;
     background-color: var(--card-background);
     border: 3px solid var(--border-color);
@@ -1215,6 +1210,13 @@ img {
     position: relative;
 }
 
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .project-image video {
     width: 100%;
     height: 100%;
@@ -1311,7 +1313,7 @@ img {
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    color: #333;
+    color: var(--text-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     position: relative;
 }
@@ -1520,7 +1522,7 @@ img {
 
 .experience-date {
     font-family: var(--pixel-font);
-    font-size: .7rem;
+    font-size: .85rem;
     letter-spacing: .5px;
     color: var(--accent-color);
     background: rgba(var(--accent-color-rgb),0.12);
@@ -1531,13 +1533,13 @@ img {
 }
 
 .experience-card h4 {
-    font-size: .95rem;
+    font-size: 1rem;
     margin: 0 0 4px;
     line-height: 1.25;
 }
 
 .experience-card h5 {
-    font-size: .7rem;
+    font-size: .85rem;
     font-weight: 500;
     opacity: .85;
     margin: 0 0 10px;
@@ -1546,7 +1548,7 @@ img {
 }
 
 .experience-card p {
-    font-size: .75rem;
+    font-size: .95rem;
     line-height: 1.4;
     margin: 0;
 }
@@ -1563,7 +1565,7 @@ img {
 .experience-points li {
     position: relative;
     padding-left: 14px;
-    font-size: .72rem;
+    font-size: .9rem;
     line-height: 1.35;
 }
 
@@ -1582,7 +1584,7 @@ img {
 }
 
 .experience-note {
-    font-size: .6rem;
+    font-size: .8rem;
     opacity: .6;
     margin-top: 25px;
     text-align: center;
@@ -1724,7 +1726,8 @@ img {
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: var(--primary-color);
-    outline: none;
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 /* Footer */

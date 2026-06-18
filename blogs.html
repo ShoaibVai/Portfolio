@@ -73,7 +73,7 @@
 
     <!-- Audio Controls -->
     <div id="audio-controls">
-        <button id="toggle-sound" class="cursor-target" aria-label="Toggle Sound">
+        <button id="toggle-sound" class="cursor-target" aria-label="Toggle Sound" aria-pressed="false">
             <i class="fas fa-volume-up"></i>
         </button>
     </div>
@@ -89,7 +89,9 @@
     <nav id="main-navigation" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo" width="40" height="40" loading="eager" decoding="async">
+                <a href="index.html" aria-label="Home">
+                    <img src="assets/images/logo.png" alt="Shoaib Ibna Omar" class="nav-logo" width="40" height="40" loading="eager" decoding="async">
+                </a>
             </div>
             
             <!-- Desktop Navigation -->
@@ -121,7 +123,7 @@
                 <h2>Blogs</h2>
             </div>
             <div class="blog-placeholder" data-animation="hidden" data-aos="fade-up" data-aos-duration="700">
-                <h1 class="glitch-effect">Blog Coming Soon!</h1>
+                <h3 class="glitch-effect">Blog Coming Soon!</h3>
                 <p class="pixel-text" data-typing>New articles and thoughts on game development are on the way.</p>
             </div>
         </div>
@@ -132,7 +134,7 @@
     <footer>
         <p>&copy; 2026 Shoaib Ibna Omar | Game Developer, AR/VR Engineer & AI Engineer</p>
         <p>Email: <a href="mailto:shoaibibnaomar@gmail.com">shoaibibnaomar@gmail.com</a> | Phone: (+880)1777144103</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/shoaibibnaomar" target="_blank">Shoaib Ibna Omar</a> | GitHub: <a href="https://github.com/ShoaibVai" target="_blank">ShoaibVai</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/shoaibibnaomar" target="_blank" rel="noopener noreferrer">Shoaib Ibna Omar</a> | GitHub: <a href="https://github.com/ShoaibVai" target="_blank" rel="noopener noreferrer">ShoaibVai</a></p>
         <p class="pixel-text">Made with ❤️ and a lot of ☕</p>
         <p class="small-muted">References available on request — Professor Dr. Sheak Rashed Haider, Noori Md Hasanuzzaman Dipu</p>
     </footer>
