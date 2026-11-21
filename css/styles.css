@@ -659,6 +659,13 @@ img {
     box-shadow: 0 4px 6px var(--shadow-color);
     transition: all var(--transition-speed) ease;
     opacity: 0.9;
+    /* Frame the button and center it so the icon never sits off-center */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    box-sizing: border-box;
 }
 
 #audio-controls:hover, #theme-toggle:hover {
@@ -681,8 +688,10 @@ img {
 /* text-size-toggle removed */
 
 #toggle-sound, #toggle-theme {
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    min-height: 0;
     background-color: transparent;
     color: var(--text-color);
     font-size: 1.2rem;
@@ -1467,15 +1476,9 @@ img {
 /* New Experience Layout */
 .experience-grid {
     display: grid;
-    gap: 30px;
-    margin-top: 30px;
-}
-
-@media (min-width: 992px) {
-    .experience-grid {
-        grid-template-columns: 1fr 320px 1fr; /* left column, bridge, right column */
-        align-items: start;
-    }
+    gap: 25px 30px;
+    max-width: 1060px;
+    margin: 30px auto 0;
 }
 
 .experience-subtitle {
@@ -1484,18 +1487,32 @@ img {
     color: var(--accent-color);
     margin: 0 0 15px;
     letter-spacing: 1px;
+    line-height: 1.4;
 }
 
 .experience-column {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    min-width: 0;
 }
 
-.experience-bridge {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+@media (min-width: 992px) {
+    .experience-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto auto auto; /* subtitles, first cards, second cards */
+        align-items: stretch;
+    }
+
+    /* Columns share the parent's rows so cards line up across columns */
+    .experience-column {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: 1 / span 3;
+    }
+
+    .experience-column:first-child { grid-column: 1; }
+    .experience-column:last-child { grid-column: 2; }
 }
 
 .experience-card {
@@ -1515,11 +1532,6 @@ img {
     border-color: var(--accent-color);
 }
 
-.experience-card.bridge-card {
-    background: linear-gradient(135deg, rgba(var(--accent-color-rgb),0.12), rgba(var(--secondary-color-rgb,255,255,255),0.05));
-    border-width: 3px;
-}
-
 .experience-date {
     font-family: var(--pixel-font);
     font-size: .85rem;
@@ -1530,6 +1542,7 @@ img {
     padding: 4px 10px 3px;
     border-radius: 14px;
     margin-bottom: 10px;
+    white-space: nowrap;
 }
 
 .experience-card h4 {
@@ -1591,11 +1604,7 @@ img {
 }
 
 @media (max-width: 991px) {
-    .experience-bridge { order: 2; }
     .experience-grid { grid-template-columns: 1fr; }
-    .experience-column:first-child { order: 1; }
-    .experience-column:last-child { order: 3; }
-    .experience-card.bridge-card { margin: 10px 0 25px; }
 }
 
 /* Contact Section */

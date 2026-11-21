@@ -1,0 +1,100 @@
+/* 8-bit Theme Toggle - View Transitions API styling
+ *
+ * Works with js/theme-transition.js. While a transition is active
+ * (html[data-theme-vt="active"]):
+ *   - the default old/new cross-fade is disabled,
+ *   - the new snapshot is pinned to a collapsed clip-path until the JS
+ *     stepped animation takes over (prevents unclipped paint in Firefox),
+ *   - a dithered pixel-grid overlay flickers over the new theme snapshot.
+ */
+
+/* Disable the default cross-fade while our stepped reveal runs */
+html[data-theme-vt="active"]::view-transition-old(root),
+html[data-theme-vt="active"]::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* Keep the new theme hidden until the 8-bit stepped animation starts.
+ * The active mode pins either --theme-vt-mask (pixel dissolve) or
+ * --theme-vt-clip (geometric expand); the unused one falls back to none. */
+html[data-theme-vt="active"]::view-transition-new(root) {
+    clip-path: var(--theme-vt-clip, none);
+    -webkit-mask-image: var(--theme-vt-mask, none);
+    mask-image: var(--theme-vt-mask, none);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+/* Chunky pixel-block staircase: the animation itself is generated from JS
+ * keyframes; this only syncs the group lifetime to the JS duration. */
+html[data-theme-vt="active"]::view-transition-group(root) {
+    animation-duration: var(--theme-vt-duration, 420ms);
+    animation-timing-function: steps(1, end);
+}
+
+/* ------------------------------------------------------------------ */
+/* Pixel-grid overlay (part of the new snapshot, revealed in sync)     */
+/* ------------------------------------------------------------------ */
+
+#theme-vt-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    pointer-events: none;
+    opacity: 0;
+    /* Chunky 4px pixel grid + CRT scanlines + dither checkerboard */
+    background-image:
+        repeating-conic-gradient(rgba(255, 255, 255, 0.10) 0% 25%, transparent 0% 50%),
+        repeating-linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.22) 0px,
+            rgba(0, 0, 0, 0.22) 1px,
+            transparent 1px,
+            transparent 3px
+        ),
+        repeating-linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.16) 0px,
+            rgba(0, 0, 0, 0.16) 1px,
+            transparent 1px,
+            transparent 4px
+        ),
+        repeating-linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.16) 0px,
+            rgba(0, 0, 0, 0.16) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+    background-size:
+        4px 4px,
+        100% 100%,
+        100% 100%,
+        100% 100%;
+}
+
+/* While the transition runs the overlay is visible and fades out smoothly,
+ * ending exactly when the reveal completes. */
+body.theme-vt-active #theme-vt-overlay {
+    opacity: 0.5;
+    animation: theme-vt-fade var(--theme-vt-duration, 600ms) cubic-bezier(0.33, 0, 0.2, 1) forwards;
+}
+
+@keyframes theme-vt-fade {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.theme-vt-active #theme-vt-overlay {
+        animation: none;
+        opacity: 0;
+    }
+}

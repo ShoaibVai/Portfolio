@@ -94,6 +94,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Theme toggle
     if (toggleThemeButton) {
         toggleThemeButton.addEventListener('click', toggleTheme);
+        // Pre-generate the dissolve mask frames on idle so every toggle
+        // starts instantly.
+        if (window.ThemeTransition && window.ThemeTransition.prewarm) {
+            window.ThemeTransition.prewarm({
+                button: toggleThemeButton,
+                duration: 1000,
+                blockSize: 12,
+                chaos: 0.4
+            });
+        }
     }
     
     // Sound toggle
@@ -283,13 +293,32 @@ function animateElement(selector, animationClass, delay = 0) {
     }
 }
 
-// Toggle theme between light and dark
+// Toggle theme between light and dark (8-bit View Transition reveal)
 function toggleTheme() {
-    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.body.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
-    updateThemeIcon();
+    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+    const applyTheme = () => {
+        currentTheme = nextTheme;
+        document.body.setAttribute('data-theme', currentTheme);
+        localStorage.setItem('theme', currentTheme);
+        updateThemeIcon();
+    };
+
     playSound('click-sound');
+
+    if (window.ThemeTransition && typeof window.ThemeTransition.run === 'function') {
+        // Chaotic 8-bit pixel dissolve expanding from the toggle button.
+        window.ThemeTransition.run(applyTheme, {
+            button: toggleThemeButton,
+            duration: 1000,    // slower crawl, eased pacing
+            mode: 'dissolve',  // pixel takeover radiating from the button; 'expand' = geometric wipe
+            variant: 'square', // used only by mode: 'expand'
+            blockSize: 12,     // px per 8-bit block (smaller = finer grain)
+            chaos: 0.4         // frontier raggedness: 0 = clean ring, 1 = fully random
+        });
+    } else {
+        // Fallback: no View Transitions API / module not loaded yet.
+        applyTheme();
+    }
 }
 
 // Update the theme toggle icon

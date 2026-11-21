@@ -166,8 +166,6 @@
     }
 
     #toggle-sound, #toggle-theme {
-        width: 45px;
-        height: 45px;
         font-size: 1.1rem;
     }
 
@@ -436,6 +434,8 @@
         width: 44px;
         height: 44px;
     }
+
+    /* Buttons fill their container so icons stay centered */
     
     #audio-controls {
         top: 10px;
