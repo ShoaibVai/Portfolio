@@ -690,60 +690,95 @@ function createAnchoredDecorations() {
         'assets/images/confetti-images/7.gif',
         'assets/images/confetti-images/8.gif',
         'assets/images/confetti-images/9.gif',
-        'assets/images/confetti-images/10.gif'
+        'assets/images/confetti-images/10.gif',
+        'assets/images/confetti-images/11.gif',
+        'assets/images/confetti-images/12.gif',
+        'assets/images/confetti-images/13.gif',
+        'assets/images/confetti-images/14.gif',
+        'assets/images/confetti-images/15.gif'
     ];
     
-    // Get all sections to anchor decorations to
-    const sections = document.querySelectorAll('.game-section');
+    // Get all sections to anchor decorations to (plus the hero header)
+    const sections = document.querySelectorAll('.game-section, header.main-header');
     const variants = ['variant-1', 'variant-2', 'variant-3', 'variant-4'];
-    const sizes = ['size-small', 'size-medium', 'size-large'];
-    
+    const sizes = ['size-small', 'size-small', 'size-medium', 'size-medium', 'size-large'];
+
+    // Random helper
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+    // Pick a scattered point inside the section: best-of-N sampling keeps a
+    // minimum distance between pieces so nothing clumps together
+    const placed = [];
+    function scatteredPosition(axisMax) {
+        let best = null, bestDist = -1;
+        for (let attempt = 0; attempt < 6; attempt++) {
+            const x = rand(2, axisMax);
+            const y = rand(3, 87);
+            let minDist = Infinity;
+            placed.forEach(p => {
+                const d = Math.hypot(p.x - x, p.y - y);
+                if (d < minDist) minDist = d;
+            });
+            if (minDist > bestDist) { bestDist = minDist; best = { x, y }; }
+        }
+        placed.push(best);
+        return best;
+    }
+
     sections.forEach((section, sectionIndex) => {
         // Make section position relative for absolute positioning of decorations
         if (getComputedStyle(section).position === 'static') {
             section.style.position = 'relative';
         }
-        
-        // Add 2-3 PNG decorations per section (animated)
-        const pngCount = Math.floor(Math.random() * 2) + 2; // 2-3 decorations
+
+        placed.length = 0; // reset placement grid per section
+
+        // Add 4-6 PNG decorations per section (animated), scattered across the section
+        const pngCount = Math.floor(Math.random() * 3) + 4; // 4-6 decorations
         for (let i = 0; i < pngCount; i++) {
             const decoration = document.createElement('div');
             decoration.className = 'anchored-decoration animated';
-            
+
             // Random PNG image
-            const randomPng = pngImages[Math.floor(Math.random() * pngImages.length)];
-            decoration.style.backgroundImage = `url('${randomPng}')`;
-            
-            // Random variant and size
-            const randomVariant = variants[Math.floor(Math.random() * variants.length)];
-            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-            decoration.classList.add(randomVariant, randomSize);
-            
-            // Random position within the section
-            decoration.style.left = Math.random() * 80 + 10 + '%'; // 10-90%
-            decoration.style.top = Math.random() * 70 + 15 + '%';  // 15-85%
-            
+            decoration.style.backgroundImage = `url('${pick(pngImages)}')`;
+
+            // Random variant and size (weighted small/medium for balance)
+            decoration.classList.add(pick(variants), pick(sizes));
+
+            // Scattered position within the section
+            const pos = scatteredPosition(92);
+            decoration.style.left = pos.x + '%';
+            decoration.style.top = pos.y + '%';
+
+            // Aesthetic touches: random rotation and opacity
+            decoration.style.setProperty('--dec-rot', rand(-24, 24).toFixed(1) + 'deg');
+            decoration.style.opacity = rand(0.45, 0.8).toFixed(2);
+
             section.appendChild(decoration);
         }
-        
-        // Add 1-2 GIF decorations per section (static)
-        const gifCount = Math.floor(Math.random() * 2) + 1; // 1-2 decorations
+
+        // Add 2-3 GIF decorations per section (static), scattered too
+        const gifCount = Math.floor(Math.random() * 2) + 2; // 2-3 decorations
         for (let i = 0; i < gifCount; i++) {
             const decoration = document.createElement('div');
             decoration.className = 'anchored-decoration static';
-            
+
             // Random GIF image
-            const randomGif = gifImages[Math.floor(Math.random() * gifImages.length)];
-            decoration.style.backgroundImage = `url('${randomGif}')`;
-            
+            decoration.style.backgroundImage = `url('${pick(gifImages)}')`;
+
             // Random size (no animation variant needed for static)
-            const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-            decoration.classList.add(randomSize);
-            
-            // Random position within the section (different from PNGs)
-            decoration.style.right = Math.random() * 80 + 10 + '%'; // Position from right
-            decoration.style.bottom = Math.random() * 70 + 15 + '%'; // Position from bottom
-            
+            decoration.classList.add(pick(sizes));
+
+            // Scattered position within the section (shares placement grid with PNGs)
+            const pos = scatteredPosition(88);
+            decoration.style.right = pos.x + '%';
+            decoration.style.bottom = pos.y + '%';
+
+            // Static ones can carry a fixed rotation directly
+            decoration.style.transform = `rotate(${rand(-18, 18).toFixed(1)}deg)`;
+            decoration.style.opacity = rand(0.55, 0.85).toFixed(2);
+
             section.appendChild(decoration);
         }
     });
